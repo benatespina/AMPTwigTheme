@@ -1,0 +1,23 @@
+{
+    "name": "benatespina/amp-twig-theme",
+    "description": "AMP oriented theme for Twig template engine",
+    "type": "library",
+    "keywords": [
+        "amp",
+        "twig",
+        "ampproject",
+        "theme"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "benatespina",
+            "email": "benatespina@gmail.com",
+            "homepage": "https://benatespina.com"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "twig/twig": "^2.0"
+    }
+}

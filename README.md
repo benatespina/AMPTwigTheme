@@ -1,6 +1,9 @@
 # AMP Twig Theme
 > AMP oriented theme for Twig template engine
 
+## Requirements
+PHP >= 7.0
+
 ## Credits
 This theme is created by:
 >
