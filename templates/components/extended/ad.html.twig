@@ -40,10 +40,8 @@
 {% endset placeholder_content %}
 
 {% set class = ad_class is not empty ? 'class="' ~ ad_class ~ '"' %}
-{% set data_consent_notification_id = ad_data_consent_notification_id is not empty
-    ? 'data-consent-notification-id="' ~ ad_data_consent_notification_id ~ '"' %}
-{% set data_loading_strategy = ad_data_loading_strategy is not empty
-    ? 'data_loading_strategy="' ~ ad_data_loading_strategy ~ '"' %}
+{% set data_consent_notification_id = ad_data_consent_notification_id is not empty ? 'data-consent-notification-id="' ~ ad_data_consent_notification_id ~ '"' %}
+{% set data_loading_strategy = ad_data_loading_strategy is not empty ? 'data_loading_strategy="' ~ ad_data_loading_strategy ~ '"' %}
 {% set data_vars = ad_data_vars is not empty ? 'data_vars="' ~ ad_data_vars ~ '"' %}
 {% set height = ad_height is not empty ? 'height="' ~ ad_height ~ '"' %}
 {% set heights = ad_heights is not empty ? 'heights="' ~ ad_heights ~ '"' %}
@@ -55,8 +53,7 @@
 {% set on = ad_on is not empty ? 'on="' ~ ad_on ~ '"' %}
 {% set sizes = ad_sizes is not empty ? 'sizes="' ~ ad_sizes ~ '"' %}
 {% set type = ad_type is not empty ? 'type="' ~ ad_type ~ '"' %}
-{% set type_data_attributes = ad_type_data_attributes is not empty
-    ? 'type_data_attributes="' ~ ad_type_data_attributes ~ '"' %}
+{% set type_data_attributes = ad_type_data_attributes is not empty ? 'type_data_attributes="' ~ ad_type_data_attributes ~ '"' %}
 {% set width = ad_width is not empty ? 'width="' ~ ad_width ~ '"' %}
 
 <amp-ad {{ id }}

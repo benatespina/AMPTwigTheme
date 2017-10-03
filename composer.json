@@ -19,5 +19,13 @@
     "require": {
         "php": "^7.0",
         "twig/twig": "^2.0"
+    },
+    "require-dev": {
+        "allocine/twigcs": "^2.1"
+    },
+    "scripts": {
+        "cs": [
+            "vendor/bin/twigcs lint templates"
+        ]
     }
 }
