@@ -5,9 +5,12 @@
 # For the full copyright and license information, please view the LICENSE
 # file that was distributed with this source code.
 
-twig:
-    paths:
-        '%kernel.root_dir%/../templates': ~
-        '%kernel.project_dir%/templates': AMP
-    debug: '%kernel.debug%'
-    strict_variables: '%kernel.debug%'
+page:
+    path: /
+    defaults:
+        _controller: 'Tests\App\Controller\PageController::__invoke'
+
+amp:
+    path: /amp
+    defaults:
+        _controller: 'Tests\App\Controller\AmpController::__invoke'

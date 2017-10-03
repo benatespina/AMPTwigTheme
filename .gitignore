@@ -6,4 +6,8 @@
 # file that was distributed with this source code.
 
 /composer.lock
+/tests/Application/.env
+/tests/Application/.web-server-pid
+/tests/Application/public/bundles/
+/tests/Application/var/
 /vendor

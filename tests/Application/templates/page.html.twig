@@ -1,1 +1,24 @@
-{% extends '@AMP/app.html.twig' %}
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page</title>
+
+    {% include '@AMP/partials/amphtml.html.twig' with {
+        amphtml_amp_url: path('amp')
+    } %}
+</head>
+<body class="body">
+{% block body %}{% endblock body %}
+</body>
+</html>
+
