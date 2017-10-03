@@ -1,0 +1,63 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    This extended component displays a full featured AMP embed.
+
+    @param embed_class                              string
+    @param embed_data_consent_notification_id       string
+    @param embed_data_loading_strategy              int=3           only it can be 0, 1, 2 or 3
+    @param embed_data_vars                          array           key/value array
+    @param embed_height                             int
+    @param embed_heights                            string          only matters when the layout is "responsive"
+    @param embed_id                                 string
+    @param embed_json                               string
+    @param embed_layout                             string          only it can be "nodisplay" or "responsive"
+    @param embed_media                              string
+    @param embed_noloading                          string          only it can be "noloading"
+    @param embed_on                                 string
+    @param embed_sizes                              string
+    @param embed_type                               string*         only it can be one of this set *1
+    @param embed_type_data_attributes               array           key/value array
+    @param embed_width                              int
+
+
+    *1 https://github.com/ampproject/amphtml/blob/master/extensions/amp-ad/amp-ad.md#supported-ad-networks
+#}
+
+{% set fallback_content %}
+    {% block embed_fallback_content %}{% endblock embed_fallback_content %}
+{% endset fallback_content %}
+
+{% set placeholder_content %}
+    {% block embed_placeholder_content %}{% endblock embed_placeholder_content %}
+{% endset placeholder_content %}
+
+{% embed '@AMP/components/extended/ad.html.twig' with {
+    ad_class: embed_class|default,
+    ad_data_consent_notification_id: embed_data_consent_notification_id|default,
+    ad_data_loading_strategy: embed_data_loading_strategy|3,
+    ad_data_vars: embed_data_vars|default,
+    ad_height: embed_height|default,
+    ad_heights: embed_heights|default,
+    ad_id: embed_id|default,
+    ad_json: embed_json|default,
+    ad_layout: embed_layout|default,
+    ad_media: embed_media|default,
+    ad_noloading: embed_noloading|default,
+    ad_on: embed_on|default,
+    ad_sizes: embed_sizes|default,
+    ad_src: embed_type|default,
+    ad_type: embed_type,
+    ad_type_parameters: embed_type_data_attributes|default,
+    ad_width: embed_width|default
+} %}
+    {{ fallback_content }}
+    {{ placeholder_content }}
+{% endembed %}

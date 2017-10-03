@@ -1,0 +1,34 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+<!doctype html>
+<html ⚡>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="description" content="">
+
+    <title>{%- block title -%}{% include '@AMP/partials/title.html.twig' %}{%- endblock title -%}</title>
+    <link rel="canonical" href="{%- block canonical -%}{% include '@AMP/partials/canonical.html.twig' %}{%- endblock canonical -%}">
+
+    <style amp-custom>{%- block styles -%}{% include '@AMP/partials/styles.html.twig' %}{%- endblock styles -%}</style>
+
+    {% block microdata %}{% include '@AMP/partials/microdata.html.twig' %}{% endblock microdata %}
+    {% block fonts %}{% include '@AMP/partials/fonts.html.twig' %}{% endblock fonts %}
+
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    {% block extended_components %}{% include '@AMP/partials/extended_components.html.twig' %}{% endblock extended_components %}
+    {% block extended_templates %}{% include '@AMP/partials/extended_templates.html.twig' %}{% endblock extended_templates %}
+</head>
+<body class="body">
+    {% block body %}{% endblock body %}
+</body>
+</html>

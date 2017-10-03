@@ -1,0 +1,33 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    This built-in component displays a full featured AMP iframe.
+
+    @param iframe_class              string
+    @param iframe_height             int
+    @param iframe_id                 string
+    @param iframe_layout             string          only it can be "nodisplay" or "responsive"
+    @param iframe_resizable          string          only it can be "resizable"
+    @param iframe_sandbox            string
+    @param iframe_src                string*
+    @param iframe_width              int
+#}
+
+{% set class = iframe_class is not empty ? 'class="' ~ iframe_class ~ '"' %}
+{% set height = iframe_height is not empty ? 'height="' ~ iframe_height ~ '"' %}
+{% set id = iframe_id is not empty ? 'id="' ~ iframe_id ~ '"' %}
+{% set layout = (iframe_layout == 'nodisplay' or iframe_layout == 'responsive') ? 'layout="' ~ iframe_layout ~ '"' %}
+{% set resizable = iframe_resizable is not empty ? 'resizable' %}
+{% set sandbox = iframe_sandbox is not empty ? 'sandbox="' ~ iframe_sandbox ~ '"' %}
+{% set width = iframe_width is not empty ? 'width="' ~ iframe_width ~ '"' %}
+
+<amp-iframe {{ id }} {{ class }} {{ height }} {{ layout }} {{ resizable }} {{ sandbox }} src="{{ iframe_src }}" {{ width }}>
+    {% block iframe_children %}{% endblock iframe_children %}
+</amp-iframe>

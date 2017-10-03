@@ -1,0 +1,81 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    This extended component displays a full featured AMP ad.
+
+    @param ad_class                              string
+    @param ad_data_consent_notification_id       string
+    @param ad_data_loading_strategy              int=3           only it can be 0, 1, 2 or 3
+    @param ad_data_vars                          array           key/value array
+    @param ad_height                             int
+    @param ad_heights                            string          only matters when the layout is "responsive"
+    @param ad_id                                 string
+    @param ad_json                               string
+    @param ad_layout                             string          only it can be "nodisplay" or "responsive"
+    @param ad_media                              string
+    @param ad_noloading                          string          only it can be "noloading"
+    @param ad_on                                 string
+    @param ad_sizes                              string
+    @param ad_type                               string*         only it can be one of this set *1
+    @param ad_type_data_attributes               array           key/value array
+    @param ad_width                              int
+
+
+    *1 https://github.com/ampproject/amphtml/blob/master/extensions/amp-ad/amp-ad.md#supported-ad-networks
+#}
+
+{% set fallback_content %}
+    {% block ad_fallback_content %}{% endblock ad_fallback_content %}
+{% endset fallback_content %}
+
+{% set placeholder_content %}
+    {% block ad_placeholder_content %}{% endblock ad_placeholder_content %}
+{% endset placeholder_content %}
+
+{% set class = ad_class is not empty ? 'class="' ~ ad_class ~ '"' %}
+{% set data_consent_notification_id = ad_data_consent_notification_id is not empty
+    ? 'data-consent-notification-id="' ~ ad_data_consent_notification_id ~ '"' %}
+{% set data_loading_strategy = ad_data_loading_strategy is not empty
+    ? 'data_loading_strategy="' ~ ad_data_loading_strategy ~ '"' %}
+{% set data_vars = ad_data_vars is not empty ? 'data_vars="' ~ ad_data_vars ~ '"' %}
+{% set height = ad_height is not empty ? 'height="' ~ ad_height ~ '"' %}
+{% set heights = ad_heights is not empty ? 'heights="' ~ ad_heights ~ '"' %}
+{% set id = ad_id is not empty ? 'id="' ~ ad_id ~ '"' %}
+{% set json = ad_json is not empty ? 'json="' ~ ad_json ~ '"' %}
+{% set layout = (ad_layout == 'nodisplay' or ad_layout == 'responsive') ? 'layout="' ~ ad_layout ~ '"' %}
+{% set media = ad_media is not empty ? 'media="' ~ ad_media ~ '"' %}
+{% set noloading = ad_noloading is not empty ? 'noloading' %}
+{% set on = ad_on is not empty ? 'on="' ~ ad_on ~ '"' %}
+{% set sizes = ad_sizes is not empty ? 'sizes="' ~ ad_sizes ~ '"' %}
+{% set type = ad_type is not empty ? 'type="' ~ ad_type ~ '"' %}
+{% set type_data_attributes = ad_type_data_attributes is not empty
+    ? 'type_data_attributes="' ~ ad_type_data_attributes ~ '"' %}
+{% set width = ad_width is not empty ? 'width="' ~ ad_width ~ '"' %}
+
+<amp-ad {{ id }}
+        {{ class }}
+        {{ data_consent_notification_id }}
+        {{ data_loading_strategy }}
+        {{ data_vars }}
+        {{ height }}
+        {{ heights }}
+        {{ json }}
+        {{ layout }}
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ sizes }}
+        {{ src }}
+        {{ type }}
+        {{ type_data_attributes }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+</amp-ad>
