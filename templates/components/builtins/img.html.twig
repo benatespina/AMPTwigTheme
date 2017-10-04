@@ -1,0 +1,71 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    A runtime-managed replacement for the HTML img tag.
+
+    @param img_alt                string*
+    @param img_attribution        string
+    @param img_class              string
+    @param img_height             int*
+    @param img_heights            string                     only matters when the layout is "responsive"
+    @param img_id                 string
+    @param img_layout             string=responsive          only it can be "nodisplay" or "responsive"
+    @param img_media              string
+    @param img_noloading          string                     only it can be "noloimging"
+    @param img_on                 string
+    @param img_sizes              string
+    @param img_src                string*
+    @param img_srcset             string
+    @param img_width              int*
+#}
+
+{% set fallback_content %}
+    {% block img_fallback_content %}{% endblock img_fallback_content %}
+{% endset %}
+
+{% set placeholder_content %}
+    {% block img_placeholder_content %}{% endblock img_placeholder_content %}
+{% endset %}
+
+{% set img_layout = img_layout|default('responsive') %}
+
+{% set alt = img_alt|default ? 'alt=' ~ img_alt %}
+{% set attribution = img_attribution|default ? 'attribution=' ~ img_attribution %}
+{% set class = img_class|default ? 'class=' ~ img_class %}
+{% set height = img_height ? 'height=' ~ img_height %}
+{% set heights = img_heights|default ? 'heights=' ~ img_heights %}
+{% set id = img_id|default ? 'id=' ~ img_id %}
+{% set layout = (img_layout == 'nodisplay' or img_layout == 'responsive') ? 'layout=' ~ img_layout %}
+{% set media = img_media|default ? 'media=' ~ img_media %}
+{% set noloading = img_noloading|default ? 'noloading' %}
+{% set on = img_on|default ? 'on=' ~ img_on %}
+{% set sizes = img_sizes|default ? 'sizes=' ~ img_sizes %}
+{% set src = img_src|default ? 'src=' ~ img_src %}
+{% set srcset = img_srcset|default ? 'srcset="' ~ img_srcset ~ '"' %}
+{% set width = img_width ? 'width=' ~ img_width %}
+
+<amp-img {{ id }}
+        {{ class }}
+        {{ alt }}
+        {{ attribution }}
+        {{ height }}
+        {{ heights }}
+        {{ attribution }}
+        {{ layout }}
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ sizes }}
+        {{ src }}
+        {{ srcset|raw }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+</amp-img>

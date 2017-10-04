@@ -1,3 +1,45 @@
 {% extends '@AMP/app.html.twig' %}
 
 {%- block canonical -%}{{ url('page') }}{%- endblock canonical -%}
+
+{%- block styles -%}
+    .body {
+        height: auto;
+        width: 100%;
+    }
+{%- endblock styles -%}
+
+{% block body %}
+
+    {% include '@AMP/components/builtins/img.html.twig' with {
+        img_src: '/images/01.jpg',
+        img_layout: 'nodisplay',
+        img_height: 10,
+        img_width: 20
+    } %}
+
+    {% include '@AMP/components/builtins/img.html.twig' with {
+        img_src: '/images/01.jpg',
+        img_height: 10,
+        img_width: 70
+    } %}
+
+    {% include '@AMP/components/builtins/img.html.twig' with {
+        img_src: '/images/02.jpg',
+        img_srcset: '/images/03.jpg 640w,/images/04.jpg 320w',
+        img_layout: 'responsive',
+        img_height: 20,
+        img_width: 30
+    } %}
+
+    {% include '@AMP/components/builtins/pixel.html.twig' with {
+        pixel_src: 'https://foo.com/tracker/foo'
+    } %}
+
+    {% include '@AMP/components/extensions/iframe.html.twig' with {
+        iframe_src: 'https://www.youtube.com/embed/hWrWmU6VclA',
+        iframe_height: 20,
+        iframe_width: 30
+    } %}
+
+{% endblock body %}

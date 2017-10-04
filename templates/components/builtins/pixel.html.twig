@@ -1,0 +1,61 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    Can be used as a typical tracking pixel to count pageviews.
+
+    @param pixel_height             int
+    @param pixel_heights            string                     only matters when the layout is "responsive"
+    @param pixel_id                 string
+    @param pixel_layout             string=nodisplay           only it can be "nodisplay" or "responsive"
+    @param pixel_media              string
+    @param pixel_noloading          string                     only it can be "noloimging"
+    @param pixel_on                 string
+    @param pixel_referrer_policy    string                     only it can be "no-referrer"
+    @param pixel_sizes              string
+    @param pixel_src                string*
+    @param pixel_width              int
+#}
+
+{% set fallback_content %}
+    {% block pixel_fallback_content %}{% endblock pixel_fallback_content %}
+{% endset %}
+
+{% set placeholder_content %}
+    {% block pixel_placeholder_content %}{% endblock pixel_placeholder_content %}
+{% endset %}
+
+{% set pixel_layout = pixel_layout|default('nodisplay') %}
+
+{% set height = pixel_height|default ? 'height=' ~ pixel_height %}
+{% set heights = pixel_heights|default ? 'heights=' ~ pixel_heights %}
+{% set id = pixel_id|default ? 'id=' ~ pixel_id %}
+{% set layout = (pixel_layout == 'nodisplay' or pixel_layout == 'responsive') ? 'layout=' ~ pixel_layout %}
+{% set media = pixel_media|default ? 'media=' ~ pixel_media %}
+{% set noloading = img_noloading|default ? 'noloading' %}
+{% set on = pixel_on|default ? 'on=' ~ pixel_on %}
+{% set referrer_policy = iframe_referrer_policy|default == 'no-referrer' ? 'referrerpolicy=no-referrer' %}
+{% set sizes = pixel_sizes|default ? 'sizes=' ~ pixel_sizes %}
+{% set src = pixel_src|default ? 'src=' ~ pixel_src %}
+{% set width = pixel_width|default ? 'width=' ~ pixel_width %}
+
+<amp-pixel {{ id }}
+        {{ height }}
+        {{ heights }}
+        {{ layout }}
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ referrer_policy }}
+        {{ sizes }}
+        {{ src }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+</amp-pixel>
