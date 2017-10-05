@@ -1,6 +1,13 @@
 # AMP Twig Theme
 > AMP oriented theme for Twig template engine
 
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a3e5fe1a-397d-440c-8331-50aa7e543a3f/mini.png)](https://insight.sensiolabs.com/projects/a3e5fe1a-397d-440c-8331-50aa7e543a3f)
+[![Build Status](https://travis-ci.org/benatespina/AMPTwigTheme.svg?branch=master)](https://travis-ci.org/benatespina/AMPTwigTheme)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/benatespina/AMPTwigTheme/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/benatespina/AMPTwigTheme/?branch=master)
+[![Total Downloads](https://poser.pugx.org/benatespina/amp-twig-theme/downloads)](https://packagist.org/packages/benatespina/amp-twig-theme)
+[![Latest Stable Version](https://poser.pugx.org/benatespina/amp-twig-theme/v/stable.svg)](https://packagist.org/packages/benatespina/amp-twig-theme)
+[![Latest Unstable Version](https://poser.pugx.org/benatespina/amp-twig-theme/v/unstable.svg)](https://packagist.org/packages/benatespina/amp-twig-theme)
+
 ## Requirements
 PHP >= 7.0
 
