@@ -19,13 +19,13 @@
 
     <style amp-custom>{%- block styles -%}{% include '@AMP/partials/styles.css.twig' %}{%- endblock styles -%}</style>
 
-    {% block microdata %}{% include '@AMP/partials/microdata.html.twig' %}{% endblock microdata %}
-    {% block fonts %}{% include '@AMP/partials/fonts.html.twig' %}{% endblock fonts %}
+    {%- block microdata -%}{% include '@AMP/partials/microdata.html.twig' %}{%- endblock microdata -%}
+    {%- block fonts -%}{% include '@AMP/partials/fonts.html.twig' %}{%- endblock fonts -%}
 
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <script async src="https://cdn.ampproject.org/v0.js"></script>
 
-    {% block extensions %}{% include '@AMP/partials/extensions.html.twig' %}{% endblock extensions %}
+    {%- block extensions -%}{% include '@AMP/partials/extensions.html.twig' %}{%- endblock extensions -%}
 </head>
 <body class="body">
     {% block body %}{% endblock body %}
