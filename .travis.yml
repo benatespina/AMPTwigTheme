@@ -16,6 +16,9 @@ php:
 env:
     - COMPOSER_OPTIONS="--prefer-source"
 
+before_install:
+    - touch .env.dist   # to satisfy the Symfony Flex directory demands
+
 install:
     - composer update --no-interaction ${COMPOSER_OPTIONS}
 
