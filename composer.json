@@ -33,12 +33,13 @@
     "scripts": {
         "cs": [
             "vendor/bin/twigcs lint templates",
-            "vendor/bin/twigcs lint tests/Application/templates"
+            "vendor/bin/twigcs lint tests/Application/templates --ruleset \\\\Tests\\\\Cs\\\\Ruleset"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\App\\": "tests/Application/src/"
+            "Tests\\App\\": "tests/Application/src/",
+            "Tests\\Cs\\": "tests/Cs/"
         }
     },
     "config": {
