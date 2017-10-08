@@ -12,6 +12,10 @@
 {%- block canonical -%}{{ url('page') }}{%- endblock canonical -%}
 
 {%- block styles -%}
+    .sidebar {
+        width: 40%;
+    }
+
     .content {
         display:grid;
         grid-template-areas:
@@ -47,94 +51,108 @@
 {%- endblock styles -%}
 
 {% set extensions_enabled = [
-    'amp-iframe'
+    'amp-iframe',
+    'amp-sidebar'
 ] %}
 
-{% block body %}
-    <div class="content">
-        <header class="header">
-            <h1>This is the the header of the document</h1>
-        </header>
-        <main class="main">
-            <section>
-                <h2>This is the first section of the main</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-                {% include '@AMP/components/builtins/img.html.twig' with {
-                    img_src: '/images/01.jpg',
-                    img_layout: 'nodisplay',
-                    img_height: 10,
-                    img_width: 20
-                } %}
-            </section>
-            <section>
-                <h2>This is the second section of the main</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-                {% include '@AMP/components/extensions/iframe.html.twig' with {
-                    iframe_src: 'https://benatespina.com',
-                    iframe_height: 20,
-                    iframe_width: 30
-                } %}
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-            </section>
-        </main>
-        <aside class="aside">
-            <section>
-                {% include '@AMP/components/builtins/img.html.twig' with {
-                    img_src: '/images/02.jpg',
-                    img_srcset: '/images/03.jpg 640w,/images/04.jpg 320w',
-                    img_layout: 'responsive',
-                    img_height: 20,
-                    img_width: 30
-                } %}
-            </section>
-            <section>
-                <h2>This is the first section of the aside</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-                {% include '@AMP/components/builtins/pixel.html.twig' with {
-                    pixel_src: 'https://google.com'
-                } %}
-            </section>
-            <section>
-                <h2>This is the second section of the aside</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                    eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </p>
-            </section>
-        </aside>
-        <footer class="footer">
+{%- block sidebar -%}
+    {% embed '@AMP/components/menu.html.twig' %}
+        {% block menu_content %}
+            <ul>
+                <li>Nav item 1</li>
+                <li>Nav item 2</li>
+                <li>Nav item 3</li>
+                <li>Nav item 4</li>
+                <li>Nav item 5</li>
+                <li>Nav item 6</li>
+            </ul>
+        {% endblock menu_content %}
+    {% endembed %}
+{%- endblock sidebar -%}
+
+{%- block content -%}
+    <header class="header">
+        <h1>This is the the header of the document</h1>
+    </header>
+    <main class="main">
+        <section>
+            <h2>This is the first section of the main</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
             {% include '@AMP/components/builtins/img.html.twig' with {
                 img_src: '/images/01.jpg',
+                img_layout: 'nodisplay',
                 img_height: 10,
-                img_width: 70
+                img_width: 20
             } %}
-        </footer>
-    </div>
-{% endblock body %}
+        </section>
+        <section>
+            <h2>This is the second section of the main</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            {% include '@AMP/components/extensions/iframe.html.twig' with {
+                iframe_src: 'https://benatespina.com',
+                iframe_height: 20,
+                iframe_width: 30
+            } %}
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+        </section>
+    </main>
+    <aside class="aside">
+        <section>
+            {% include '@AMP/components/builtins/img.html.twig' with {
+                img_src: '/images/02.jpg',
+                img_srcset: '/images/03.jpg 640w,/images/04.jpg 320w',
+                img_layout: 'responsive',
+                img_height: 20,
+                img_width: 30
+            } %}
+        </section>
+        <section>
+            <h2>This is the first section of the aside</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+            {% include '@AMP/components/builtins/pixel.html.twig' with {
+                pixel_src: 'https://google.com'
+            } %}
+        </section>
+        <section>
+            <h2>This is the second section of the aside</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.
+            </p>
+        </section>
+    </aside>
+    <footer class="footer">
+        {% include '@AMP/components/builtins/img.html.twig' with {
+            img_src: '/images/01.jpg',
+            img_height: 10,
+            img_width: 70
+        } %}
+    </footer>
+{%- endblock content -%}

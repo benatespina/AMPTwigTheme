@@ -1,0 +1,55 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    A component that displays the sidebar menu with multiple extension block points.
+
+    @param menu_content     string
+#}
+
+{% set content %}
+    {%- block menu_content -%}
+        {{ menu_content|default }}
+    {%- endblock menu_content -%}
+{% endset %}
+
+{% set initializer %}
+    {%- block menu_initializer -%}
+        <button class="menu__open-button" on="tap:sidebar.open">
+            <svg height="32px" viewBox="0 0 32 32" width="32px">
+                <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2
+    s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2
+    S29.104,22,28,22z"/>
+            </svg>
+        </button>
+    {%- endblock menu_initializer -%}
+{% endset %}
+
+{% embed '@AMP/components/extensions/sidebar.html.twig' with {
+    sidebar_class: 'menu'
+} %}
+    {% block sidebar_content %}
+        <nav class="menu__content">
+            <button class="menu__close-button" on="tap:sidebar.close">
+                <svg height="24px" viewBox="0 0 24 24" width="24px">
+                    <path d="M22.245,4.015c0.313,0.313,0.313,0.826,0,1.139l-6.276,6.27c-0.313,0.312-0.313,0.826,0,1.14l6.273,6.272
+                    c0.313,0.313,0.313,0.826,0,1.14l-2.285,2.277c-0.314,0.312-0.828,0.312-1.142,0l-6.271-6.271c-0.313-0.313-0.828-0.313-1.141,0
+                    l-6.276,6.267c-0.313,0.313-0.828,0.313-1.141,0l-2.282-2.28c-0.313-0.313-0.313-0.826,0-1.14l6.278-6.269
+                    c0.313-0.312,0.313-0.826,0-1.14L1.709,5.147c-0.314-0.313-0.314-0.827,0-1.14l2.284-2.278C4.308,1.417,4.821,1.417,5.135,1.73
+                    L11.405,8c0.314,0.314,0.828,0.314,1.141,0.001l6.276-6.267c0.312-0.312,0.826-0.312,1.141,0L22.245,4.015z"/>
+                </svg>
+            </button>
+            {{ content }}
+        </nav>
+    {% endblock sidebar_content %}
+{% endembed %}
+
+<div class="menu__initializer">
+    {{ initializer }}
+</div>

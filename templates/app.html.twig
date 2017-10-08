@@ -28,6 +28,9 @@
     {%- block extensions -%}{% include '@AMP/partials/extensions.html.twig' %}{%- endblock extensions -%}
 </head>
 <body class="body">
-    {% block body %}{% endblock body %}
+    {%- block sidebar -%}{%- endblock sidebar -%}
+    <div class="content">
+        {%- block content -%}{%- endblock content -%}
+    </div>
 </body>
 </html>

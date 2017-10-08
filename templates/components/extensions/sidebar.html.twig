@@ -7,4 +7,73 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-sidebar.md #}
+{##
+    A sidebar provides a way to display meta content intended for temporary access
+    (navigation links, buttons, menus, etc.). The sidebar can be revealed by a button
+    tap while the main content remains visually underneath.
+
+    @param sidebar_class                              string
+    @param sidebar_data_close_button_aria_label       string
+    @param sidebar_height                             int
+    @param sidebar_heights                            string          only matters when the layout is "responsive"
+    @param sidebar_id                                 string=sidebar
+    @param sidebar_media                              string
+    @param sidebar_noloading                          string          only it can be "noloading"
+    @param sidebar_on                                 string
+    @param sidebar_open                               string
+    @param sidebar_side                               string=left      also, it can be "right"
+    @param sidebar_sizes                              string
+    @param sidebar_toolbar_media                      string
+    @param sidebar_toolbar_target                     string
+    @param sidebar_width                              int
+#}
+
+{% set fallback_content %}
+    {% block sidebar_fallback_content %}{% endblock sidebar_fallback_content %}
+{% endset %}
+
+{% set placeholder_content %}
+    {% block sidebar_placeholder_content %}{% endblock sidebar_placeholder_content %}
+{% endset %}
+
+{% set content %}
+    {% block sidebar_content %}{% endblock sidebar_content %}
+{% endset %}
+
+{% set toolbar %}
+    {% if sidebar_toolbar_media|default != null and sidebar_toolbar_target|default != null %}
+        <nav toolbar="{{ sidebar_toolbar_media }}" toolbar-target="{{ sidebar_toolbar_target }}">
+            {% block sidebar_toolbar %}{% endblock sidebar_toolbar %}
+        </nav>
+    {% endif %}
+{% endset %}
+
+{% set class = sidebar_class|default ? 'class=' ~ sidebar_class %}
+{% set data_close_button_aria_label = sidebar_data_close_button_aria_label|default ? 'sidebar-data-close-button-aria-label=' ~ sidebar_data_close_button_aria_label %}
+{% set height = sidebar_height|default ? 'height=' ~ sidebar_height %}
+{% set heights = sidebar_heights|default ? 'heights=' ~ sidebar_heights %}
+{% set id = 'id=' ~ sidebar_id|default('sidebar') %}
+{% set media = sidebar_media|default ? 'media=' ~ sidebar_media %}
+{% set noloading = sidebar_noloading|default ? 'noloading' %}
+{% set on = sidebar_on|default ? 'on=' ~ sidebar_on %}
+{% set open = sidebar_open|default ? 'open' %}
+{% set sizes = sidebar_sizes|default ? 'sizes=' ~ sidebar_sizes %}
+{% set width = sidebar_width|default ? 'width=' ~ sidebar_width %}
+
+<amp-sidebar {{ id }}
+        {{ class }}
+        {{ data_close_button_aria_label }}
+        {{ height }}
+        {{ heights }}
+        layout="nodisplay"
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ open }}
+        {{ sizes }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+    {{ content }}
+    {{ toolbar }}
+</amp-sidebar>
