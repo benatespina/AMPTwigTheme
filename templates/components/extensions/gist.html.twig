@@ -7,4 +7,14 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-gist.md #}
+{##
+    Displays a GitHub Gist.
+
+    @param gist_data_gistid             string*
+    @param gist_height                  int*
+    @param gist_data_file               string
+#}
+
+{% set data_file = gist_data_file|default ? 'data-file=' ~ gist_data_file %}
+
+<amp-gist data-gistid="{{ gist_data_gistid }}" {{ data_file }} layout="fixed-height" height="{{ gist_height }}"></amp-gist>
