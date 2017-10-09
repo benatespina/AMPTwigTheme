@@ -7,4 +7,70 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-youtube.md #}
+{##
+    Displays a YouTube video.
+
+    @param youtube_autoplay             boolean
+    @param youtube_class                string
+    @param youtube_data_params          array                   key/value array
+    @param youtube_data_videoid         string*
+    @param youtube_height               int
+    @param youtube_heights              string                  only matters when the layout is "responsive"
+    @param youtube_id                   string=sidebar
+    @param youtube_layout               string=responsive       only it can be "fill", "fixed", "fixed-height", "flex-item", "nodisplay" or "responsive"
+    @param youtube_media                string
+    @param youtube_noloading            string                  only it can be "noloading"
+    @param youtube_on                   string
+    @param youtube_sizes                string
+    @param youtube_width                int
+#}
+
+{% set fallback %}
+    {% block youtube_fallback %}{% endblock youtube_fallback %}
+{% endset %}
+
+{% set placeholder %}
+    {% block youtube_placeholder %}{% endblock youtube_placeholder %}
+{% endset %}
+
+{% set available_layouts = [
+    'fill',
+    'fixed',
+    'fixed-height',
+    'flex-item',
+    'nodisplay',
+    'responsive'
+] %}
+
+{% set autoplay = youtube_autoplay|default == true ? 'autoplay' %}
+{% set class = youtube_class|default ? 'class=' ~ youtube_class %}
+{% set data_videoid = 'data-videoid=' ~ youtube_data_videoid %}
+{% set height = youtube_height|default ? 'height=' ~ youtube_height %}
+{% set heights = youtube_heights|default ? 'heights=' ~ youtube_heights %}
+{% set id = 'id=' ~ youtube_id|default('sidebar') %}
+{% set layout = youtube_layout|default('responsive') in available_layouts ? 'layout=' ~ youtube_layout|default('responsive') %}
+{% set media = youtube_media|default ? 'media=' ~ youtube_media %}
+{% set noloading = youtube_noloading|default ? 'noloading' %}
+{% set on = youtube_on|default ? 'on=' ~ youtube_on %}
+{% set width = youtube_width|default ? 'width=' ~ youtube_width %}
+
+{% set data_params = '' %}
+{% for key, value in youtube_data_params|default %}
+    {% set data_params = data_params ~ ' data-param-' ~ key ~ '=' ~ value %}
+{% endfor %}
+
+<amp-youtube {{ id }}
+        {{ class }}
+        {{ autoplay }}
+        {{ data_params }}
+        {{ data_videoid }}
+        {{ height }}
+        {{ heights }}
+        {{ layout }}
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ width }}>
+    {{ fallback }}
+    {{ placeholder }}
+</amp-youtube>

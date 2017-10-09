@@ -20,17 +20,30 @@
     @param iframe_width              int
 #}
 
+{% set content %}
+    {%- block iframe_children -%}{%- endblock iframe_children -%}
+{% endset %}
+
+{% set available_layouts = [
+    'fill',
+    'fixed',
+    'fixed-height',
+    'flex-item',
+    'nodisplay',
+    'responsive'
+] %}
+
 {% set iframe_layout = iframe_layout|default('responsive') %}
 {% set iframe_sandbox = iframe_sandbox|default('allow-scripts') %}
 
 {% set class = iframe_class|default ? 'class=' ~ iframe_class %}
 {% set height = iframe_height ? 'height=' ~ iframe_height %}
 {% set id = iframe_id|default ? 'id=' ~ iframe_id %}
-{% set layout = (iframe_layout == 'nodisplay' or iframe_layout == 'responsive') ? 'layout=' ~ iframe_layout %}
+{% set layout = iframe_layout in available_layouts ? 'layout=' ~ iframe_layout %}
 {% set resizable = iframe_resizable|default ? 'resizable' %}
 {% set sandbox = iframe_sandbox|default ? 'sandbox=' ~ iframe_sandbox %}
 {% set width = iframe_width ? 'width=' ~ iframe_width %}
 
 <amp-iframe {{ id }} {{ class }} {{ height }} {{ layout }} {{ resizable }} {{ sandbox }} src="{{ iframe_src }}" {{ width }}>
-    {% block iframe_children %}{% endblock iframe_children %}
+    {{ content }}
 </amp-iframe>
