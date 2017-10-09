@@ -7,4 +7,30 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-analytics.md #}
+{##
+    Capture analytics data from an AMP document.
+
+    @param analytics_config                         string
+    @param analytics_data_consent_notification_id   string
+    @param analytics_data_credentials               string
+    @param analytics_id                             string
+    @param analytics_type                           string=googleanalytics
+
+
+    * More info about json_content in https://developers.google.com/analytics/devguides/collection/amp-analytics/
+#}
+
+{% set json_content %}
+    {%- block analytics_json_content -%}{%- endblock analytics_json_content -%}
+{% endset %}
+
+{% set config = analytics_config|default ? 'config=' ~ analytics_config %}
+{% set data_consent_notification_id = analytics_data_consent_notification_id|default ? 'data-consent-notification-id=' ~ analytics_data_consent_notification_id %}
+{% set data_credentials = analytics_data_credentials|default ? 'data-credentials=' ~ analytics_data_credentials %}
+{% set id = analytics_id|default ? 'id=' ~ analytics_id %}
+{% set type = analytics_type|default('googleanalytics') ? 'type=' ~ analytics_type|default('googleanalytics') %}
+
+<amp-analytics {{ id }} {{ type }} {{ config }} {{ data_credentials }} {{ data_consent_notification_id }}>
+    {% if json_content %}<script type="application/json">{{ json_content }}</script>{% endif %}
+</amp-analytics>
+

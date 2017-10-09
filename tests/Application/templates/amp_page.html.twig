@@ -51,8 +51,9 @@
 {%- endblock styles -%}
 
 {% set extensions_enabled = [
+    'amp-analytics',
     'amp-iframe',
-    'amp-sidebar'
+    'amp-sidebar',
 ] %}
 
 {%- block sidebar -%}
@@ -156,3 +157,19 @@
         } %}
     </footer>
 {%- endblock content -%}
+
+{%- block analytics -%}
+    {% include '@AMP/components/extensions/analytics.html.twig' with {
+        analytics_json_content: {
+            "vars": {
+                "account": "UA-XXXXX-Y"
+            },
+            "triggers": {
+                "trackPageview": {
+                    "on": "visible",
+                    "request": "pageview"
+                }
+            }
+        }
+    } %}
+{%- endblock analytics -%}
