@@ -12,8 +12,17 @@
 {%- block canonical -%}{{ url('page') }}{%- endblock canonical -%}
 
 {%- block styles -%}
-    .sidebar {
+    .menu {
         width: 40%;
+    }
+
+    .menu__content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu__close-button {
+        align-self: flex-end;
     }
 
     .content {
@@ -51,6 +60,7 @@
 {%- endblock styles -%}
 
 {% set extensions_enabled = [
+    'amp-ad',
     'amp-analytics',
     'amp-iframe',
     'amp-sidebar',
@@ -147,6 +157,25 @@
                 eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim id est laborum.
             </p>
+        </section>
+        <section>
+            {% embed '@AMP/components/extensions/ad.html.twig' with {
+                ad_type: 'adsense',
+                ad_type_data_attributes: {
+                    'data-ad-client': 'ca-pub-2005682797531342',
+                    'data-ad-slot': '7046626912'
+                },
+                ad_height: '200px',
+                ad_width: '200px'
+            } %}
+                {% block ad_placeholder %}
+                    <div placeholder>Loading ...</div>
+                {% endblock %}
+
+                {% block ad_fallback %}
+                    <div fallback>No ad for you</div>
+                {% endblock %}
+            {% endembed %}
         </section>
     </aside>
     <footer class="footer">

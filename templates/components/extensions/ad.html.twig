@@ -8,13 +8,15 @@
 #}
 
 {##
-    This extended component displays a full featured AMP ad.
+    A container to display an ad. The amp-embed is an alias to the amp-ad tag,
+    deriving all of its functionality with a different tag name. Use amp-embed when
+    semantically more accurate. AMP documents only support ads/embeds served via HTTPS.
 
     @param ad_class                              string
     @param ad_data_consent_notification_id       string
     @param ad_data_loading_strategy              int=3           only it can be 0, 1, 2 or 3
     @param ad_data_vars                          array           key/value array
-    @param ad_height                             int
+    @param ad_height                             int*
     @param ad_heights                            string          only matters when the layout is "responsive"
     @param ad_id                                 string
     @param ad_json                               string
@@ -22,39 +24,174 @@
     @param ad_media                              string
     @param ad_noloading                          string          only it can be "noloading"
     @param ad_on                                 string
+    @param ad_src                                string
     @param ad_sizes                              string
     @param ad_type                               string*         only it can be one of this set *1
     @param ad_type_data_attributes               array           key/value array
-    @param ad_width                              int
+    @param ad_width                              int*
 
 
     *1 https://github.com/ampproject/amphtml/blob/master/extensions/amp-ad/amp-ad.md#supported-ad-networks
 #}
 
-{% set fallback_content %}
-    {% block ad_fallback_content %}{% endblock ad_fallback_content %}
-{% endset fallback_content %}
+{% set fallback %}
+    {% block ad_fallback %}{% endblock ad_fallback %}
+{% endset %}
 
-{% set placeholder_content %}
-    {% block ad_placeholder_content %}{% endblock ad_placeholder_content %}
-{% endset placeholder_content %}
+{% set placeholder %}
+    {% block ad_placeholder %}{% endblock ad_placeholder %}
+{% endset %}
 
-{% set class = ad_class is not empty ? 'class="' ~ ad_class ~ '"' %}
-{% set data_consent_notification_id = ad_data_consent_notification_id is not empty ? 'data-consent-notification-id="' ~ ad_data_consent_notification_id ~ '"' %}
-{% set data_loading_strategy = ad_data_loading_strategy is not empty ? 'data_loading_strategy="' ~ ad_data_loading_strategy ~ '"' %}
-{% set data_vars = ad_data_vars is not empty ? 'data_vars="' ~ ad_data_vars ~ '"' %}
-{% set height = ad_height is not empty ? 'height="' ~ ad_height ~ '"' %}
-{% set heights = ad_heights is not empty ? 'heights="' ~ ad_heights ~ '"' %}
-{% set id = ad_id is not empty ? 'id="' ~ ad_id ~ '"' %}
-{% set json = ad_json is not empty ? 'json="' ~ ad_json ~ '"' %}
-{% set layout = (ad_layout == 'nodisplay' or ad_layout == 'responsive') ? 'layout="' ~ ad_layout ~ '"' %}
-{% set media = ad_media is not empty ? 'media="' ~ ad_media ~ '"' %}
-{% set noloading = ad_noloading is not empty ? 'noloading' %}
-{% set on = ad_on is not empty ? 'on="' ~ ad_on ~ '"' %}
-{% set sizes = ad_sizes is not empty ? 'sizes="' ~ ad_sizes ~ '"' %}
-{% set type = ad_type is not empty ? 'type="' ~ ad_type ~ '"' %}
-{% set type_data_attributes = ad_type_data_attributes is not empty ? 'type_data_attributes="' ~ ad_type_data_attributes ~ '"' %}
-{% set width = ad_width is not empty ? 'width="' ~ ad_width ~ '"' %}
+{% set available_ad_types = [
+    'a8',
+    'a9',
+    'accesstrade',
+    'adblade',
+    'adbutler',
+    'adform',
+    'adfox',
+    'adgeneration',
+    'adhese',
+    'adition',
+    'adman',
+    'admanmedia',
+    'adocean',
+    'adreactor',
+    'adsense',
+    'adsnative',
+    'adspirit',
+    'adspeed',
+    'adstir',
+    'adtech',
+    'adthrive',
+    'aduptechnology',
+    'adverline',
+    'adverticum',
+    'advertserve',
+    'affiliateb',
+    'amoad',
+    'appnexus',
+    'atomx',
+    'bidtellect',
+    'brainy',
+    'caajainfeed',
+    'caprofitx',
+    'chargeads',
+    'colombia',
+    'contentad',
+    'criteo',
+    'csa',
+    'cxensedisplay',
+    'dianomi',
+    'directadvert',
+    'distroscale',
+    'dotandmedia',
+    'doubleclick',
+    'eplanning',
+    'ezoic',
+    'flexoneelephant',
+    'flexoneharrier',
+    'fluct',
+    'felmat',
+    'flite',
+    'fusion',
+    'genieessp',
+    'gmossp',
+    'gumgum',
+    'holder',
+    'imedia',
+    'imobile',
+    'ibillboard',
+    'improvedigital',
+    'indexexchange',
+    'industrybrains',
+    'inmobi',
+    'innity',
+    'kargo',
+    'kiosked',
+    'kixer',
+    'ligatus',
+    'loka',
+    'mads',
+    'mantis',
+    'mediaimpact',
+    'medianet',
+    'mediavine',
+    'meg',
+    'microad',
+    'mixpo',
+    'mywidget',
+    'nativo',
+    'navegg',
+    'nend',
+    'netletix',
+    'nokta',
+    'openadstream',
+    'openx',
+    'plista',
+    'polymorphicads',
+    'popin',
+    'pubmatic',
+    'pubmine',
+    'pulsepoint',
+    'purch',
+    'rambler&co',
+    'relap',
+    'revcontent',
+    'rubiconproject',
+    'sharethrough',
+    'sklik',
+    'slimcutmedia',
+    'smartadserver',
+    'smartclip',
+    'sortable',
+    'sogouad',
+    'sovrn',
+    'spotx',
+    'sunmedia',
+    'swoop',
+    'teads',
+    'triplelift',
+    'valuecommerce',
+    'vmfive',
+    'webediads',
+    'weborama',
+    'widespace',
+    'xlift',
+    'yahoo',
+    'yahoojp',
+    'yandex',
+    'yengo',
+    'yieldbot',
+    'yieldmo',
+    'yieldone',
+    'zedo',
+    'zucks'
+] %}
+
+{% set layout = ad_layout|default('responsive') %}
+
+{% set type_data_attributes = '' %}
+{% for key, value in ad_type_data_attributes|default %}
+    {% set type_data_attributes = type_data_attributes ~ ' ' ~ key ~ '=' ~ value %}
+{% endfor %}
+
+{% set class = ad_class|default ? 'class=' ~ ad_class %}
+{% set data_consent_notification_id = ad_data_consent_notification_id|default ? 'data-consent-notification-id=' ~ ad_data_consent_notification_id %}
+{% set data_loading_strategy = ad_data_loading_strategy|default ? 'data_loading_strategy=' ~ ad_data_loading_strategy %}
+{% set data_vars = ad_data_vars|default ? 'data_vars=' ~ ad_data_vars %}
+{% set height = ad_height ? 'height=' ~ ad_height %}
+{% set heights = ad_heights|default ? 'heights=' ~ ad_heights %}
+{% set id = ad_id|default ? 'id=' ~ ad_id %}
+{% set json = ad_json|default ? 'json=' ~ ad_json %}
+{% set layout = (layout == 'nodisplay' or layout == 'responsive') ? 'layout=' ~ layout %}
+{% set media = ad_media|default ? 'media=' ~ ad_media %}
+{% set noloading = ad_noloading|default ? 'noloading' %}
+{% set on = ad_on|default ? 'on=' ~ ad_on %}
+{% set sizes = ad_sizes|default ? 'sizes=' ~ ad_sizes %}
+{% set src = ad_src|default ? 'src=' ~ ad_src %}
+{% set type = ad_type in available_ad_types ? 'type=' ~ ad_type %}
+{% set width = ad_width ? 'width=' ~ ad_width %}
 
 <amp-ad {{ id }}
         {{ class }}
@@ -73,6 +210,6 @@
         {{ type }}
         {{ type_data_attributes }}
         {{ width }}>
-    {{ fallback_content }}
-    {{ placeholder_content }}
+    {{ fallback }}
+    {{ placeholder }}
 </amp-ad>
