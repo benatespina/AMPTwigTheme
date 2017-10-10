@@ -57,12 +57,30 @@
         margin-left: -15px;
         margin-right: -15px;
     }
+
+    form.amp-form-submit-success [submit-success],
+    form.amp-form-submit-error [submit-error] {
+        margin-top: 16px;
+    }
+
+    form.amp-form-submit-success [submit-success] {
+        color: green;
+    }
+
+    form.amp-form-submit-error [submit-error] {
+        color: red;
+    }
+
+    form.amp-form-submit-success.hide-inputs > input {
+        display: none;
+    }
 {%- endblock styles -%}
 
 {% set extensions_enabled = [
     'amp-ad',
     'amp-analytics',
     'amp-gist',
+    'amp-form',
     'amp-iframe',
     'amp-sidebar',
     'amp-youtube'
@@ -91,11 +109,38 @@
         <section>
             <h2>This is the first section of the main</h2>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                deserunt mollit anim id est laborum.
+                {% embed '@AMP/components/extensions/form.html.twig' with {
+                    form_action: 'https://ampbyexample.com/components/amp-form/submit-form-input-text-xhr',
+                    form_method: 'post',
+                    form_target: '_top',
+                    form_custom_validation_reporting: 'show-all-on-submit',
+                    form_on: [{'submit': 'success-lightbox'}]
+                } %}
+                    {%- block form_content -%}
+                        {% include '@AMP/components/form_group.html.twig' with {
+                            form_group_id: 'show-all-on-submit-name',
+                            form_group_placeholder: 'Name...',
+                            form_group_pattern: '\\w+\\s\\w+',
+                            form_group_required: true,
+                            form_group_type: 'text',
+                            form_group_validations: {
+                                'valueMissing': '',
+                                'patternMismatch': 'This is custom validation message'
+                            }
+                        } %}
+                        {% include '@AMP/components/form_group.html.twig' with {
+                            form_group_id: 'show-all-on-submit-email',
+                            form_group_placeholder: 'Email...',
+                            form_group_required: true,
+                            form_group_type: 'email',
+                            form_group_validations: {
+                                'valueMissing': '',
+                                'typeMismatch': 'The email must have the @ symbol'
+                            }
+                        } %}
+                        <input type="submit" value="Send">
+                    {%- endblock form_content -%}
+                {% endembed %}
             </p>
             {% include '@AMP/components/builtins/img.html.twig' with {
                 img_src: '/images/01.jpg',

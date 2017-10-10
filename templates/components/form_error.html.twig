@@ -1,0 +1,19 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    This atom will display a form input associated error.
+
+    @param form_error_content        html*
+    @param form_error_class_name     string
+#}
+
+<p class="form-error{% if form_error_class_name|default %} {{ form_error_class_name }}{% endif %}">
+    {{ form_error_content|raw }}
+</p>

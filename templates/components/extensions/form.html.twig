@@ -7,4 +7,48 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-form.md #}
+{##
+    Allow usage of form and input tags.
+
+    @param form_action                          string*
+    @param form_class                           string
+    @param form_custom_validation_reporting     string           only it can be "show-first-on-submit", "show-all-on-submit" or "as-you-go"
+    @param form_id                              string
+    @param form_is_ajax                         boolean=true
+    @param form_method                          string*          only it can be "GET" or "POST"
+    @param form_on                              array=[]         key/value with event/target-element, event only can be "submit",
+                                                                 "submit-success", "submit-error", "valid" or "invalid"
+    @param form_target                          string*          only it can be "_blank" or "_top"
+#}
+
+{% set content %}
+    {%- block form_content -%}{%- endblock form_content -%}
+{% endset %}
+
+{% set available_methods = ['GET', 'POST'] %}
+{% set available_custom_validation_reporting = ['show-first-on-submit', 'show-all-on-submit', 'as-you-go'] %}
+{% set available_events = ['submit', 'submit-success', 'submit-error', 'valid', 'invalid'] %}
+{% set available_targets = ['_top', '_blank'] %}
+
+{% set on = '' %}
+{% if form_on|default([]) is not empty %}
+    {% set on = 'on=' %}
+    {% for key_value in form_on %}
+        {% for target_element, event in key_value %}
+            {% if event in available_events %}
+                {% set on = on ~ event ~ ':' ~ target_element ~ (not loop.last ? ';') %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+{% set class = form_class|default ? 'class=' ~ form_class %}
+{% set id = form_id|default ? 'id=' ~ form_id %}
+{% set method = form_method|upper in available_methods ? 'method=' ~ form_method|upper %}
+{% set custom_validation_reporting = form_custom_validation_reporting|default in available_custom_validation_reporting ? 'custom-validation-reporting=' ~ form_custom_validation_reporting %}
+{% set action = (form_is_ajax|default(true) == true or method == 'POST') ? 'action-xhr=' ~ form_action : 'action=' ~ form_action %}
+{% set target = form_target in available_targets ? 'target=' ~ form_target %}
+
+<form {{ id }} {{ class }} {{ method }} {{ action }} {{ on }} {{ target }} {{ custom_validation_reporting }}>
+    {{ content }}
+</form>

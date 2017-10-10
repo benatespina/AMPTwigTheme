@@ -1,0 +1,25 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    This atom will display a form label.
+
+    @param form_label_class_name       string
+    @param form_label_modifiers        string
+    @param form_label_content          string*
+    @param form_label_required         bool=false
+    @param form_label_for              string
+#}
+
+<label class="form-label{% if form_label_modifiers|default %} {{ form_label_modifiers }}{% endif %} {{ form_label_class_name }}"{% if form_label_for|default %} for="{{ form_label_for }}"{% endif %}>
+    {% if form_label_required|default(false) %}
+        <span class="form-label__required">*</span>
+    {% endif %}
+    {{ form_label_content|raw }}
+</label>
