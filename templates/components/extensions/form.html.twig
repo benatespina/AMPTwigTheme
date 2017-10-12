@@ -26,7 +26,7 @@
 {% endset %}
 
 {% set available_methods = ['GET', 'POST'] %}
-{% set available_custom_validation_reporting = ['show-first-on-submit', 'show-all-on-submit', 'as-you-go'] %}
+{% set available_custom_validation_reporting = ['show-first-on-submit', 'show-all-on-submit', 'as-you-go', 'interact-and-submit'] %}
 {% set available_events = ['submit', 'submit-success', 'submit-error', 'valid', 'invalid'] %}
 {% set available_targets = ['_top', '_blank'] %}
 
@@ -34,7 +34,7 @@
 {% if form_on|default([]) is not empty %}
     {% set on = 'on=' %}
     {% for key_value in form_on %}
-        {% for target_element, event in key_value %}
+        {% for event, target_element in key_value %}
             {% if event in available_events %}
                 {% set on = on ~ event ~ ':' ~ target_element ~ (not loop.last ? ';') %}
             {% endif %}

@@ -1,0 +1,23 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    A component that displays the form submit button.
+
+    @param form_submit_class                string
+    @param form_submit_disabled             boolean=false
+    @param form_submit_title                string*
+#}
+
+{% set form_submit_disabled = form_submit_disabled|default(false) %}
+
+{% set class = form_submit_class|default ? 'class=form-submit ' ~ form_submit_class : 'class=form-submit' %}
+{% set disabled = form_submit_disabled ? 'disabled' %}
+
+<input type="submit" {{ class }} {{ disabled }} value="{{ form_submit_title }}" />

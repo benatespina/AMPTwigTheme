@@ -1,0 +1,30 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    A component that displays the form textarea.
+
+    @param form_textarea_class            string
+    @param form_textarea_disabled         boolean=false
+    @param form_textarea_id               string
+    @param form_textarea_placeholder      string*
+    @param form_textarea_required         bool=false
+#}
+
+{% set form_textarea_disabled = form_textarea_disabled|default(false) %}
+{% set form_textarea_required = form_textarea_required|default(false) %}
+
+{% set class = form_textarea_class|default ? 'class=form-input ' ~ form_textarea_class : 'class=form-input' %}
+{% set disabled = form_textarea_disabled ? 'disabled' %}
+{% set id = form_textarea_id|default ? 'id=' ~ form_textarea_id %}
+{% set name = form_textarea_id|default ? 'name=' ~ form_textarea_id %}
+{% set placeholder = form_textarea_placeholder|default ? 'placeholder=' ~ form_textarea_placeholder %}
+{% set required = form_textarea_required ? 'required' %}
+
+<textarea {{ id }} {{ class }} {{ disabled }} {{ name }} {{ placeholder }} {{ required }}></textarea>

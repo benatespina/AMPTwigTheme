@@ -117,28 +117,76 @@
                     form_on: [{'submit': 'success-lightbox'}]
                 } %}
                     {%- block form_content -%}
+                        {% embed '@AMP/components/form_fieldset.html.twig' with {
+                            form_fieldset_legend: 'Personal data'
+                        } %}
+                            {%- block form_fieldset_content -%}
+                                {% include '@AMP/components/form_group.html.twig' with {
+                                    form_group_id: 'show-all-on-submit-name',
+                                    form_group_placeholder: 'Name...',
+                                    form_group_pattern: '\\w+\\s\\w+',
+                                    form_group_required: true,
+                                    form_group_type: 'text',
+                                    form_group_validations: {
+                                        'valueMissing': '',
+                                        'patternMismatch': 'This is custom validation message'
+                                    }
+                                } %}
+                                {% include '@AMP/components/form_group.html.twig' with {
+                                    form_group_id: 'show-all-on-submit-email',
+                                    form_group_placeholder: 'Email...',
+                                    form_group_required: true,
+                                    form_group_type: 'email',
+                                    form_group_validations: {
+                                        'valueMissing': '',
+                                        'typeMismatch': 'The email must have the @ symbol'
+                                    }
+                                } %}
+                                {% include '@AMP/components/form_group.html.twig' with {
+                                    form_group_id: 'show-all-on-submit-city',
+                                    form_group_options: [{
+                                        name: 'Bilbao',
+                                        value: 'bilbao'
+                                    }, {
+                                        name: 'Donostia',
+                                        value: 'donostia'
+                                    }, {
+                                        name: 'Gssteiz',
+                                        value: 'gasteiz'
+                                    }, {
+                                        name: 'Iruñea',
+                                        value: 'irunea'
+                                    }, {
+                                        name: 'Baiona',
+                                        value: 'baiona'
+                                    }, {
+                                        name: 'Donibane Garazi',
+                                        value: 'donibane-garazi'
+                                    }, {
+                                        name: 'Maule',
+                                        value: 'maule'
+                                    }],
+                                    form_group_placeholder: 'City...',
+                                    form_group_required: true,
+                                    form_group_type: 'select',
+                                    form_group_validations: {
+                                        'valueMissing': '',
+                                    }
+                                } %}
+                            {%- endblock form_fieldset_content -%}
+                        {% endembed %}
                         {% include '@AMP/components/form_group.html.twig' with {
-                            form_group_id: 'show-all-on-submit-name',
-                            form_group_placeholder: 'Name...',
-                            form_group_pattern: '\\w+\\s\\w+',
+                            form_group_id: 'show-all-on-submit-comment',
+                            form_group_placeholder: 'Comment...',
                             form_group_required: true,
-                            form_group_type: 'text',
+                            form_group_type: 'textarea',
                             form_group_validations: {
                                 'valueMissing': '',
-                                'patternMismatch': 'This is custom validation message'
                             }
                         } %}
-                        {% include '@AMP/components/form_group.html.twig' with {
-                            form_group_id: 'show-all-on-submit-email',
-                            form_group_placeholder: 'Email...',
-                            form_group_required: true,
-                            form_group_type: 'email',
-                            form_group_validations: {
-                                'valueMissing': '',
-                                'typeMismatch': 'The email must have the @ symbol'
-                            }
+                        {% include '@AMP/components/form_submit.html.twig' with {
+                            form_submit_title: 'Send'
                         } %}
-                        <input type="submit" value="Send">
                     {%- endblock form_content -%}
                 {% endembed %}
             </p>

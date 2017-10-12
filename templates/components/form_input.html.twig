@@ -8,19 +8,29 @@
 #}
 
 {##
-    This atom will display a form input.
+    A component that displays the form input.
 
-    @param form_input_type             string=text
-    @param form_input_class_name       string
-    @param form_input_modifiers        string
-    @param form_input_placeholder      string*
-    @param form_input_pattern          string
+    @param form_input_class            string
+    @param form_input_disabled         bool=false
     @param form_input_id               string
+    @param form_input_pattern          string
+    @param form_input_placeholder      string*
     @param form_input_required         bool=false
+    @param form_input_type             string=text
 #}
 
-<input class="form-input{% if form_input_modifiers|default %} {{ form_input_modifiers }}{% endif %} {{ form_input_class_name }}"
-       type="{{ form_input_type|default('text') }}" placeholder="{{ form_input_placeholder }}" autocomplete="off"
-       {% if form_input_id|default %}id="{{ form_input_id }}" name="{{ form_input_id }}"{% endif %}
-        {% if form_input_required|default %} required{% endif %}
-         {% if form_input_pattern|default %} pattern="{{ form_input_pattern }}"{% endif %}/>
+{% set form_input_disabled = form_input_disabled|default(false) %}
+{% set form_input_required = form_input_required|default(false) %}
+{% set form_input_type = form_input_type|default('text') %}
+{% set not_allowed_types = ['button', 'file', 'image', 'password'] %}
+
+{% set class = form_input_class|default ? 'class=form-input ' ~ form_input_class : 'class=form-input' %}
+{% set disabled = form_input_disabled ? 'disabled' %}
+{% set id = form_input_id|default ? 'id=' ~ form_input_id %}
+{% set name = form_input_id|default ? 'name=' ~ form_input_id %}
+{% set pattern = form_input_pattern|default ? 'pattern=' ~ form_input_pattern %}
+{% set placeholder = form_input_placeholder|default ? 'placeholder=' ~ form_input_placeholder %}
+{% set required = form_input_required ? 'required' %}
+{% set type = form_input_type in not_allowed_types ? 'type=text' : 'type=' ~ form_input_type %}
+
+<input {{ id }} {{ class }} {{ type }} {{ name }} {{ placeholder }} {{ required }} {{ disabled }} {{ pattern }} autocomplete="off" />

@@ -8,62 +8,89 @@
 #}
 
 {##
-    This componenet will display a form group composed by "form_label", "form_input" and "form_error".
+    A component that displays a form group composed by "form_label", "form_input" and "form_error".
 
-    @param  form_group_required           bool=false
-    @param  form_group_id                 string=*
-    @param  form_group_label_class_name   string
-    @param  form_group_label_modifiers    string
-    @param  form_group_label_content      html
+    @param  form_group_class              string
+    @param  form_group_disabled           bool=false
     @param  form_group_error_content      string
-    @param  form_group_error_modifiers    array|string
-    @param  form_group_class_name         string
-    @param  form_group_modifiers          array|string
+    @param  form_group_id                 string*
+    @param  form_group_input_class        string
+    @param  form_group_label_class        string
+    @param  form_group_label_content      string|html
     @param  form_group_pattern            string
-    @param  form_group_placeholder        string*
+    @param form_select_options            array*        required only if the "form_group_type" is "select"
+        - name:                           string*
+        - value:                          string*
+    @param  form_group_placeholder        string
+    @param  form_group_required           bool=false
     @param  form_group_type               string=text
+    @param  form_group_value              string
 #}
 
-<div class="form-group-input">
-    {% if  form_group_label_content|default %}
-        <div class="form-group-input__label">
+{% set form_group_class = form_group_class|default ? 'class=form-group ' ~ form_group_class : 'class=form-group' %}
+{% set form_group_disabled = form_group_disabled|default(false) %}
+{% set form_group_required = form_group_required|default(false) %}
+{% set form_group_type = form_group_type|default('text') %}
+
+<div {{ form_group_class }}>
+    {% if form_group_label_content|default %}
+        <div class="form-group__label">
             {% include '@AMP/components/form_label.html.twig' with {
+                form_label_class: form_group_label_class,
+                form_label_content: form_group_label_content,
                 form_label_for: form_group_id,
-                form_label_required: form_group_required,
-                form_label_class_name: form_group_label_class_name,
-                form_label_modifiers: form_group_label_modifiers,
-                form_label_content: form_group_label_content
+                form_label_required: form_group_required
             } %}
         </div>
     {% endif %}
 
-    {% include '@AMP/components/form_input.html.twig' with {
-        form_input_type: form_group_type,
-        form_input_id: form_group_id,
-        form_input_class_name: form_group_class_name|default,
-        form_input_pattern: form_group_pattern|default,
-        form_input_modifiers: form_group_modifiers|default,
-        form_input_placeholder: form_group_placeholder,
-        form_input_required: form_group_required
-    } %}
+    {% if form_group_type == 'textarea' %}
+        {% include '@AMP/components/form_textarea.html.twig' with {
+            form_textarea_class: form_group_input_class|default,
+            form_textarea_disabled: form_group_disabled,
+            form_textarea_id: form_group_id,
+            form_textarea_placeholder: form_group_placeholder,
+            form_textarea_required: form_group_required,
+        } %}
+    {% elseif form_group_type == 'select' %}
+        {% include '@AMP/components/form_select.html.twig' with {
+            form_select_class: form_group_input_class|default,
+            form_select_disabled: form_group_disabled,
+            form_select_id: form_group_id,
+            form_select_options: form_group_options,
+            form_select_placeholder: form_group_placeholder,
+            form_select_required: form_group_required,
+            form_select_value: form_group_value|default,
+        } %}
+    {% else %}
+        {% include '@AMP/components/form_input.html.twig' with {
+            form_input_class: form_group_input_class|default,
+            form_input_disabled: form_group_disabled,
+            form_input_id: form_group_id,
+            form_input_pattern: form_group_pattern|default,
+            form_input_placeholder: form_group_placeholder,
+            form_input_required: form_group_required,
+            form_input_type: form_group_type
+        } %}
+    {% endif %}
 
-    {% if  form_group_validations is defined %}
+    {% if form_group_validations is defined %}
         {% set form_group_error_content = '' %}
         {% for validation, message in form_group_validations %}
             {% set form_group_error_content = form_group_error_content ~ '<span visible-when-invalid="' ~ validation ~ '" validation-for="' ~ form_group_id ~ '">' ~ message ~ '</span>' %}
 
-            <div class="form-group-input__error">
+            <div class="form-group__error">
                 {% include '@AMP/components/form_error.html.twig' with {
-                    form_error_content: form_group_error_content,
-                    form_error_modifiers: form_group_error_modifiers|default
+                    form_error_class: form_group_error_class|default,
+                    form_error_content: form_group_error_content
                 } %}
             </div>
         {% endfor %}
     {% elseif form_group_error_content|default %}
-        <div class="form-group-input__error">
+        <div class="form-group__error">
             {% include '@AMP/components/form_error.html.twig' with {
-                form_error_content: form_group_error_content,
-                form_error_modifiers: form_group_error_modifiers|default
+                form_error_class: form_group_error_class|default,
+                form_error_content: form_group_error_content
             } %}
         </div>
     {% endif %}

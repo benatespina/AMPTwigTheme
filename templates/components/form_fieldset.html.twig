@@ -1,0 +1,34 @@
+{#
+    This file is part of the AMP Twig theme.
+
+    (c) Beñat Espiña <benatespina@gmail.com>
+
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+#}
+
+{##
+    A component that displays the form fieldset.
+
+    @param form_fieldset_class          string
+    @param form_fieldset_disabled       boolean=false
+    @param form_fieldset_form           string
+    @param form_fieldset_legend         string
+    @param form_fieldset_name           string
+#}
+
+{% set content %}
+    {%- block form_fieldset_content -%}{%- endblock form_fieldset_content -%}
+{% endset %}
+
+{% set form_fieldset_disabled = form_fieldset_disabled|default(false) %}
+
+{% set class = form_fieldset_class|default ? 'class=form-fieldset ' ~ form_fieldset_class : 'class=form-fieldset' %}
+{% set disabled = form_fieldset_disabled ? 'disabled' %}
+{% set form = form_fieldset_form|default ? 'form=' ~ form_fieldset_form %}
+{% set name = form_fieldset_name|default ? 'name=' ~ form_fieldset_name %}
+
+<fieldset {{ class }} {{ disabled }} {{ form }} {{ name }}>
+    {% if form_fieldset_legend|default %}<legend>{{ form_fieldset_legend }}</legend>{% endif %}
+    {{- content -}}
+</fieldset>

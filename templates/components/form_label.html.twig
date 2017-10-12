@@ -8,18 +8,21 @@
 #}
 
 {##
-    This atom will display a form label.
+    A component that displays the form label.
 
-    @param form_label_class_name       string
-    @param form_label_modifiers        string
-    @param form_label_content          string*
-    @param form_label_required         bool=false
+    @param form_label_class            string
+    @param form_label_content          string|html*
     @param form_label_for              string
+    @param form_label_required         bool=false
 #}
 
-<label class="form-label{% if form_label_modifiers|default %} {{ form_label_modifiers }}{% endif %} {{ form_label_class_name }}"{% if form_label_for|default %} for="{{ form_label_for }}"{% endif %}>
-    {% if form_label_required|default(false) %}
-        <span class="form-label__required">*</span>
-    {% endif %}
+{% set form_label_required = form_label_required|default(false) %}
+
+{% set class = form_label_class|default ? 'class=form-label ' ~ form_label_class : 'class=form-label' %}
+{% set for = form_label_for ? 'for=' form_label_for %}
+{% set required = form_label_required ? 'required' %}
+
+<label {{ class }} {{ for }}>
+    {% if required %}<span class="form-label__required">*</span>{% endif %}
     {{ form_label_content|raw }}
 </label>

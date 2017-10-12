@@ -8,12 +8,12 @@
 #}
 
 {##
-    This atom will display a form input associated error.
+    A component that displays the form error associated error.
 
-    @param form_error_content        html*
-    @param form_error_class_name     string
+    @param form_error_class          string
+    @param form_error_content        string|html*
 #}
 
-<p class="form-error{% if form_error_class_name|default %} {{ form_error_class_name }}{% endif %}">
-    {{ form_error_content|raw }}
-</p>
+{% set class = form_error_class|default ? 'class=form-error ' ~ form_error_class : 'class=form-error' %}
+
+<p {{ class }}>{{ form_error_content|raw }}</p>
