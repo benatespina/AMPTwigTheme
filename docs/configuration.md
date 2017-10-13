@@ -32,4 +32,7 @@ $loader->addPath(__DIR__ . $rootProjectDir . '/vendor/benatespina/amp-twig-theme
 
 And that's all, the library is ready to use!
 
+- For more information about the use of this library check the "[Getting Started](getting_started.md)" chapter.
+- Back to the [index](index.md).
+
 [1]: https://www.ampproject.org/

@@ -105,3 +105,6 @@ partials/
 |--------- title.html.twig
 ``` 
 > There a few more partials but we discourage its overwriting because they may appear some uncontrolled side-effects.
+
+- For more information about canonical and amphtml tags check "[AMP vs non-AMP](amp_vs_non_amp.md)" chapter.
+- Back to the [index](index.md).
