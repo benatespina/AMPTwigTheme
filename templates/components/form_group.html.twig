@@ -17,6 +17,7 @@
     @param  form_group_input_class        string
     @param  form_group_label_class        string
     @param  form_group_label_content      string|html
+    @param  form_group_name               string=form_group_id
     @param  form_group_pattern            string
     @param form_select_options            array*        required only if the "form_group_type" is "select"
         - name:                           string*
@@ -29,6 +30,7 @@
 
 {% set form_group_class = form_group_class|default ? 'class=form-group ' ~ form_group_class : 'class=form-group' %}
 {% set form_group_disabled = form_group_disabled|default(false) %}
+{% set form_group_name = form_group_name|default(form_group_id) %}
 {% set form_group_required = form_group_required|default(false) %}
 {% set form_group_type = form_group_type|default('text') %}
 
@@ -49,6 +51,7 @@
             form_textarea_class: form_group_input_class|default,
             form_textarea_disabled: form_group_disabled,
             form_textarea_id: form_group_id,
+            form_textarea_name: form_group_name,
             form_textarea_placeholder: form_group_placeholder,
             form_textarea_required: form_group_required,
         } %}
@@ -57,6 +60,7 @@
             form_select_class: form_group_input_class|default,
             form_select_disabled: form_group_disabled,
             form_select_id: form_group_id,
+            form_select_name: form_group_name,
             form_select_options: form_group_options,
             form_select_placeholder: form_group_placeholder,
             form_select_required: form_group_required,
@@ -67,6 +71,7 @@
             form_input_class: form_group_input_class|default,
             form_input_disabled: form_group_disabled,
             form_input_id: form_group_id,
+            form_input_name: form_group_name,
             form_input_pattern: form_group_pattern|default,
             form_input_placeholder: form_group_placeholder,
             form_input_required: form_group_required,

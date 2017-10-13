@@ -7,4 +7,12 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-mustache.md #}
+{##
+    Allows rendering of Mustache.js.
+#}
+
+{% set content %}
+    {%- block mustache_content -%}{%- endblock mustache_content -%}
+{% endset %}
+
+<template type="amp-mustache">{{- content|raw -}}</template>

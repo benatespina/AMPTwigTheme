@@ -12,7 +12,8 @@
 
     @param form_select_class                    string
     @param form_select_disabled                 boolean=false
-    @param form_select_id                       string
+    @param form_select_id                       string*
+    @param form_select_name                     string=form_select_id
     @param form_select_options                  array*
         - name:                                 string*
         - value:                                string*
@@ -22,12 +23,13 @@
 #}
 
 {% set form_select_disabled = form_select_disabled|default(false) %}
+{% set form_select_name = form_select_name|default(form_select_id) %}
 {% set form_select_required = form_select_required|default(false) %}
 
 {% set class = form_select_class|default ? 'class=form-select ' ~ form_select_class : 'class=form-select' %}
 {% set disabled = form_select_disabled ? 'disabled' %}
-{% set id = form_select_id|default ? 'id=' ~ form_select_id %}
-{% set name = form_select_id|default ? 'name=' ~ form_select_id %}
+{% set id = form_select_id ? 'id=' ~ form_select_id %}
+{% set name = form_select_name ? 'name=' ~ form_select_name %}
 {% set required = form_select_required ? 'required' %}
 {% set value = form_select_value|default %}
 

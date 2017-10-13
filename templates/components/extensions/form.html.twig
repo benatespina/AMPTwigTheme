@@ -25,6 +25,12 @@
     {%- block form_content -%}{%- endblock form_content -%}
 {% endset %}
 
+{% set responses %}
+    <div submit-success>{%- block form_response_success -%}{%- endblock form_response_success -%}</div>
+    <div submitting>{%- block form_response_submitting -%}{%- endblock form_response_submitting -%}</div>
+    <div submit-error>{%- block form_response_error -%}{%- endblock form_response_error -%}</div>
+{% endset %}
+
 {% set available_methods = ['GET', 'POST'] %}
 {% set available_custom_validation_reporting = ['show-first-on-submit', 'show-all-on-submit', 'as-you-go', 'interact-and-submit'] %}
 {% set available_events = ['submit', 'submit-success', 'submit-error', 'valid', 'invalid'] %}
@@ -50,5 +56,6 @@
 {% set target = form_target in available_targets ? 'target=' ~ form_target %}
 
 <form {{ id }} {{ class }} {{ method }} {{ action }} {{ on }} {{ target }} {{ custom_validation_reporting }}>
-    {{ content }}
+    {{- content -}}
+    {{- responses -}}
 </form>

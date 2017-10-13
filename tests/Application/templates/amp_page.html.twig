@@ -82,6 +82,7 @@
     'amp-gist',
     'amp-form',
     'amp-iframe',
+    'amp-mustache',
     'amp-sidebar',
     'amp-youtube'
 ] %}
@@ -113,8 +114,7 @@
                     form_action: 'https://ampbyexample.com/components/amp-form/submit-form-input-text-xhr',
                     form_method: 'post',
                     form_target: '_top',
-                    form_custom_validation_reporting: 'show-all-on-submit',
-                    form_on: [{'submit': 'success-lightbox'}]
+                    form_custom_validation_reporting: 'show-all-on-submit'
                 } %}
                     {%- block form_content -%}
                         {% embed '@AMP/components/form_fieldset.html.twig' with {
@@ -123,8 +123,19 @@
                             {%- block form_fieldset_content -%}
                                 {% include '@AMP/components/form_group.html.twig' with {
                                     form_group_id: 'show-all-on-submit-name',
+                                    form_group_name: 'name',
                                     form_group_placeholder: 'Name...',
+                                    form_group_required: true,
+                                    form_group_type: 'text',
+                                    form_group_validations: {
+                                        'valueMissing': ''
+                                    }
+                                } %}
+                                {% include '@AMP/components/form_group.html.twig' with {
+                                    form_group_id: 'show-all-on-submit-surnames',
+                                    form_group_name: 'surnames',
                                     form_group_pattern: '\\w+\\s\\w+',
+                                    form_group_placeholder: 'Surnames...',
                                     form_group_required: true,
                                     form_group_type: 'text',
                                     form_group_validations: {
@@ -134,6 +145,7 @@
                                 } %}
                                 {% include '@AMP/components/form_group.html.twig' with {
                                     form_group_id: 'show-all-on-submit-email',
+                                    form_group_name: 'email',
                                     form_group_placeholder: 'Email...',
                                     form_group_required: true,
                                     form_group_type: 'email',
@@ -170,7 +182,7 @@
                                     form_group_required: true,
                                     form_group_type: 'select',
                                     form_group_validations: {
-                                        'valueMissing': '',
+                                        'valueMissing': ''
                                     }
                                 } %}
                             {%- endblock form_fieldset_content -%}
@@ -188,6 +200,23 @@
                             form_submit_title: 'Send'
                         } %}
                     {%- endblock form_content -%}
+                    {%- block form_response_success -%}
+                        {% embed '@AMP/components/extensions/mustache.html.twig' %}
+                            {%- block mustache_content -%}
+                                {{ 'Success! Thanks {{name}} for trying the <code>amp-form</code> demo!
+                                Try to insert the word "error" as a name input in the form to see how
+                                <code>amp-form</code> handles errors.' }}
+                            {%- endblock mustache_content -%}
+                        {% endembed %}
+                    {%- endblock form_response_success -%}
+                    {%- block form_response_error -%}
+                        {% embed '@AMP/components/extensions/mustache.html.twig' %}
+                            {%- block mustache_content -%}
+                                {{ 'Error! Thanks {{name}} for trying the <code>amp-form</code> demo
+                                with an error response.' }}
+                            {%- endblock mustache_content -%}
+                        {% endembed %}
+                    {%- endblock form_response_error -%}
                 {% endembed %}
             </p>
             {% include '@AMP/components/builtins/img.html.twig' with {
