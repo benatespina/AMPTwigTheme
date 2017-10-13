@@ -10,6 +10,17 @@
 ## Requirements
 PHP >= 7.0
 
+## Installation
+The easiest way to install this bundle is using [Composer][2]
+```bash
+$ composer require benatespina/amp-twig-theme
+```
+
+## Documentation
+All the documentation is stored in the `docs` folder.
+
+[Show me the docs!](docs/index.md)
+
 ## Tests
 You can easily start a simple application based on Symfony framework to test the AMP Twig theme.
 ```bash
@@ -45,3 +56,4 @@ This theme is created by:
 [![License](https://poser.pugx.org/benatespina/amp-twig-theme/license.svg)](https://github.com/benatespina/AMPTwigTheme/blob/master/LICENSE)
 
 [1]: https://github.com/allocine/twigcs 
+[2]: http://getcomposer.org

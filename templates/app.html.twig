@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="{%- block description -%}{% include '@AMP/partials/description.html.twig' %}{%- endblock description -%}">
 
     <title>{%- block title -%}{% include '@AMP/partials/title.html.twig' %}{%- endblock title -%}</title>
     <link rel="canonical" href="{%- block canonical -%}{% include '@AMP/partials/canonical.html.twig' %}{%- endblock canonical -%}">
