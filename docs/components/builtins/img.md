@@ -38,7 +38,7 @@ Extension points:
 } %}
 ```
 
-- Back to the [index](index.md).
+- Back to the [index](../../index.md).
 
 [1]: https://github.com/ampproject/amphtml/blob/master/builtins/amp-img.md
 [2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/builtins/img.html.twig

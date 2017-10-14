@@ -171,7 +171,7 @@ A component that displays the form error associated error.
 ### form_submit
 ### form_textarea
 
-- Back to the [index](index.md).
+- Back to the [index](../../index.md).
 
 [1]: https://github.com/ampproject/amphtml/blob/master/extensions/amp-form/amp-form.md
 [2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/extensions/form.html.twig
