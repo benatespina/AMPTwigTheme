@@ -9,14 +9,10 @@
 
 {##
     A component that displays the sidebar menu with multiple extension block points.
-
-    @param sidebar_menu_content     string
 #}
 
 {% set content %}
-    {%- block sidebar_menu_content -%}
-        {{ sidebar_menu_content|default }}
-    {%- endblock sidebar_menu_content -%}
+    {%- block sidebar_menu_content -%}{%- endblock sidebar_menu_content -%}
 {% endset %}
 
 {% set initializer %}

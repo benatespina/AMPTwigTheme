@@ -8,3 +8,4 @@
         * [pixel](components/builtins/pixel.md)
     * Extensions
         * [form](components/extensions/form.md)
+        * [sidebar](components/extensions/sidebar.md)
