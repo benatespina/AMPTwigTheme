@@ -22,6 +22,10 @@
 | img_srcset          | string     | false    |               |                                               |
 | img_width           | int        | true     |               |                                               |
 
+Extension points:
+    - img_fallback_content
+    - img_placeholder_content
+
 ## Example
 
 ```twig
@@ -33,5 +37,8 @@
     img_width: 30
 } %}
 ```
+
+- Back to the [index](index.md).
+
 [1]: https://github.com/ampproject/amphtml/blob/master/builtins/amp-img.md
 [2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/builtins/img.html.twig

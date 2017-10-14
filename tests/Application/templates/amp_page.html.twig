@@ -12,16 +12,16 @@
 {%- block canonical -%}{{ url('page') }}{%- endblock canonical -%}
 
 {%- block styles -%}
-    .menu {
+    .sidebar-menu {
         width: 40%;
     }
 
-    .menu__content {
+    .sidebar-menu__content {
         display: flex;
         flex-direction: column;
     }
 
-    .menu__close-button {
+    .sidebar-menu__close-button {
         align-self: flex-end;
     }
 
@@ -88,8 +88,8 @@
 ] %}
 
 {%- block sidebar -%}
-    {% embed '@AMP/components/menu.html.twig' %}
-        {% block menu_content %}
+    {% embed '@AMP/components/sidebar_menu.html.twig' %}
+        {% block sidebar_menu_content %}
             <ul>
                 <li>Nav item 1</li>
                 <li>Nav item 2</li>
@@ -98,7 +98,7 @@
                 <li>Nav item 5</li>
                 <li>Nav item 6</li>
             </ul>
-        {% endblock menu_content %}
+        {% endblock sidebar_menu_content %}
     {% endembed %}
 {%- endblock sidebar -%}
 

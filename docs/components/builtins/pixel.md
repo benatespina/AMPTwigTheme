@@ -19,6 +19,10 @@
 | pixel_src             | string     | false    |               |                                               |
 | pixel_width           | int        | true     |               |                                               |
 
+Extension points:
+    - pixel_fallback_content
+    - pixel_placeholder_content
+
 ## Example
 
 ```twig
@@ -26,5 +30,8 @@
     pixel_src: 'https://google.com'
 } %}
 ```
+
+- Back to the [index](index.md).
+
 [1]: https://github.com/ampproject/amphtml/blob/master/builtins/amp-pixel.md
 [2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/builtins/pixel.html.twig

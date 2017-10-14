@@ -16,6 +16,12 @@
 | form_on                          | array      | false    | []            | key/value with event/target-element, event only can be "submit", "submit-success", "submit-error", "valid" or "invalid" |
 | form_target                      | string     | true     |               | only it can be "_blank" or "_top"                                          |
 
+Extension points:
+    - form_content
+    - form_response_success
+    - form_response_submitting
+    - form_response_error
+
 ## Example
 
 ```twig
@@ -136,5 +142,37 @@
     {%- endblock form_response_error -%}
 {% endembed %}
 ```
+
+## Custom form components
+The form's `form_content` block is very open so, to facilitate the DOM implementation inside this scope
+this library provides some custom components that abstract from AMP restrictions.
+
+### form_error
+A component that displays the form error associated error.
+
+[Source code][3]
+
+| Argument                   | Type        | Required | Default value | More information   | 
+|:---------------------------|:-----------:|:--------:|:-------------:|:-------------------|
+| form_error_class           | string      | false    |               |                    |
+| form_error_content         | string|html | true     |               |                    |
+
+```twig
+{% include '@AMP/components/form_error.html.twig' with {
+    form_error_content: 'Error! Thanks for trying the <code>amp-form</code> demo'
+} %}
+```
+
+### form_fieldset
+### form_group
+### form_input
+### form_label
+### form_select
+### form_submit
+### form_textarea
+
+- Back to the [index](index.md).
+
 [1]: https://github.com/ampproject/amphtml/blob/master/extensions/amp-form/amp-form.md
 [2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/extensions/form.html.twig
+[3]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/form_error.html.twig

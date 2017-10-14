@@ -10,33 +10,33 @@
 {##
     A component that displays the sidebar menu with multiple extension block points.
 
-    @param menu_content     string
+    @param sidebar_menu_content     string
 #}
 
 {% set content %}
-    {%- block menu_content -%}
-        {{ menu_content|default }}
-    {%- endblock menu_content -%}
+    {%- block sidebar_menu_content -%}
+        {{ sidebar_menu_content|default }}
+    {%- endblock sidebar_menu_content -%}
 {% endset %}
 
 {% set initializer %}
-    {%- block menu_initializer -%}
-        <button class="menu__open-button" on="tap:sidebar.open">
+    {%- block sidebar_menu_initializer -%}
+        <button class="sidebar-menu__open-button" on="tap:sidebar.open">
             <svg height="32px" viewBox="0 0 32 32" width="32px">
                 <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2
     s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2
     S29.104,22,28,22z"/>
             </svg>
         </button>
-    {%- endblock menu_initializer -%}
+    {%- endblock sidebar_menu_initializer -%}
 {% endset %}
 
 {% embed '@AMP/components/extensions/sidebar.html.twig' with {
-    sidebar_class: 'menu'
+    sidebar_class: 'sidebar-menu'
 } %}
     {% block sidebar_content %}
-        <nav class="menu__content">
-            <button class="menu__close-button" on="tap:sidebar.close">
+        <nav class="sidebar-menu__content">
+            <button class="sidebar-menu__close-button" on="tap:sidebar.close">
                 <svg height="24px" viewBox="0 0 24 24" width="24px">
                     <path d="M22.245,4.015c0.313,0.313,0.313,0.826,0,1.139l-6.276,6.27c-0.313,0.312-0.313,0.826,0,1.14l6.273,6.272
                     c0.313,0.313,0.313,0.826,0,1.14l-2.285,2.277c-0.314,0.312-0.828,0.312-1.142,0l-6.271-6.271c-0.313-0.313-0.828-0.313-1.141,0
@@ -50,6 +50,6 @@
     {% endblock sidebar_content %}
 {% endembed %}
 
-<div class="menu__initializer">
+<div class="sidebar-menu__initializer">
     {{ initializer }}
 </div>
