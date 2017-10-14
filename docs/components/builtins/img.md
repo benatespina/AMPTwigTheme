@@ -2,6 +2,7 @@
 > A runtime-managed replacement for the HTML img tag
 
 [AMP project reference][1]
+
 [Source code][2]
 
 | Argument            | Type       | Required | Default value | More information                              | 

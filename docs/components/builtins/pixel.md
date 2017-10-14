@@ -2,6 +2,7 @@
 > Can be used as a typical tracking pixel to count pageviews
 
 [AMP project reference][1]
+
 [Source code][2]
 
 | Argument              | Type       | Required | Default value | More information                              | 
