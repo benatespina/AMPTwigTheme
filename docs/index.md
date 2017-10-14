@@ -4,6 +4,6 @@
 * [AMP vs non-AMP](amp_vs_non_amp.md)
 * Components
     * Builtins
-        * [img](img.md)
-        * [pixel](pixel.md)
+        * [img](components/builtins/img.md)
+        * [pixel](components/builtins/pixel.md)
     * Extensions
