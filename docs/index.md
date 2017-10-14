@@ -7,3 +7,4 @@
         * [img](components/builtins/img.md)
         * [pixel](components/builtins/pixel.md)
     * Extensions
+        * [form](components/extensions/form.md)
