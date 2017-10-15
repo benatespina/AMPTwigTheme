@@ -7,5 +7,10 @@
         * [img](components/builtins/img.md)
         * [pixel](components/builtins/pixel.md)
     * Extensions
+        * [ad](components/extensions/ad.md)
+        * [analytics](components/extensions/analytics.md)
         * [form](components/extensions/form.md)
+        * [gist](components/extensions/gist.md)
+        * [iframe](components/extensions/iframe.md)
         * [sidebar](components/extensions/sidebar.md)
+        * [youtube](components/extensions/youtube.md)
