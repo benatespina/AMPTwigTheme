@@ -1,3 +1,5 @@
+<img height="100px" width="100px" src="https://rawgithub.com/benatespina/amptwigtheme/master/docs/logo.jpg" align="right"/>
+
 # AMP Twig Theme
 > AMP oriented theme for Twig template engine
 
