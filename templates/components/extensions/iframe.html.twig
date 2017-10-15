@@ -13,11 +13,13 @@
     @param iframe_class              string
     @param iframe_height             int
     @param iframe_id                 string
-    @param iframe_layout             string          only it can be "fill", "fixed", "fixed-height", "flex-item", "nodisplay" or "responsive"
-    @param iframe_resizable          string          only it can be "resizable"
-    @param iframe_sandbox            string
+    @param iframe_layout             string=responsive       only it can be "fill", "fixed", "fixed-height", "flex-item", "nodisplay" or "responsive"
+    @param iframe_resizable          string                  only it can be "resizable"
+    @param iframe_sandbox            string=allow-scripts    check sandbox restrictions *1
     @param iframe_src                string*
     @param iframe_width              int
+
+    *1 https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#attr-sandbox
 #}
 
 {% set content %}
@@ -33,17 +35,47 @@
     'responsive'
 ] %}
 
+{% set available_sandbox_restrictions = [
+    'allow-forms',
+    'allow-modals',
+    'allow-orientation-lock',
+    'allow-pointer-lock',
+    'allow-popups',
+    'allow-popups-to-escape-sandbox',
+    'allow-presentation',
+    'allow-same-origin',
+    'allow-scripts',
+    'allow-top-navigation',
+    'allow-top-navigation-by-user-activation'
+] %}
+
 {% set iframe_layout = iframe_layout|default('responsive') %}
-{% set iframe_sandbox = iframe_sandbox|default('allow-scripts') %}
+{% set iframe_sandbox = iframe_sandbox|default('allow-scripts')|split(' ') %}
+
+{% set sandbox = 'sandbox="' %}
+{% set sanbox_first_restriction = true %}
+{% for restriction in iframe_sandbox %}
+    {% if restriction in available_sandbox_restrictions %}
+        {% set sandbox = sandbox ~ (sanbox_first_restriction == false ? ' ') ~ restriction %}
+        {% set sanbox_first_restriction = false %}
+    {% endif %}
+{% endfor %}
+{% set sandbox = sandbox ~ '"' %}
 
 {% set class = iframe_class|default ? 'class=' ~ iframe_class %}
 {% set height = iframe_height ? 'height=' ~ iframe_height %}
 {% set id = iframe_id|default ? 'id=' ~ iframe_id %}
 {% set layout = iframe_layout in available_layouts ? 'layout=' ~ iframe_layout %}
 {% set resizable = iframe_resizable|default ? 'resizable' %}
-{% set sandbox = iframe_sandbox|default ? 'sandbox=' ~ iframe_sandbox %}
 {% set width = iframe_width ? 'width=' ~ iframe_width %}
 
-<amp-iframe {{ id }} {{ class }} {{ height }} {{ layout }} {{ resizable }} {{ sandbox }} src="{{ iframe_src }}" {{ width }}>
+<amp-iframe {{ id }}
+        {{ class }}
+        {{ height }}
+        {{ layout }}
+        {{ resizable }}
+        {{ sandbox|raw }}
+        src="{{ iframe_src }}"
+        {{ width }}>
     {{ content }}
 </amp-iframe>
