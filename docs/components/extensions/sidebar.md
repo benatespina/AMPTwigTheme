@@ -25,10 +25,10 @@
 | sidebar_width                        | int        | false    |               |                                              |
 
 Extension points:
-    - sidebar_fallback_content
-    - sidebar_placeholder_content
-    - sidebar_content
-    - sidebar_toolbar
+    * sidebar_fallback_content
+    * sidebar_placeholder_content
+    * sidebar_content
+    * sidebar_toolbar
 
 ## Example
 
