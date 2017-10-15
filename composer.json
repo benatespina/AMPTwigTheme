@@ -32,7 +32,7 @@
     },
     "scripts": {
         "cs": [
-            "vendor/bin/twigcs lint templates",
+            "vendor/bin/twigcs lint templates --severity error",
             "vendor/bin/twigcs lint tests/Application/templates --ruleset \\\\Tests\\\\Cs\\\\Ruleset"
         ]
     },
