@@ -23,7 +23,7 @@ install:
     - composer update --no-interaction ${COMPOSER_OPTIONS}
 
 script:
-    - vendor/bin/twigcs lint templates
+    - vendor/bin/twigcs lint templates --severity error
 
 cache:
     directories:
