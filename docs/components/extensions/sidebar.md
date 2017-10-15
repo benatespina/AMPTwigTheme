@@ -25,10 +25,10 @@
 | sidebar_width                        | int        | false    |               |                                              |
 
 Extension points:
-    * sidebar_fallback_content
-    * sidebar_placeholder_content
-    * sidebar_content
-    * sidebar_toolbar
+* sidebar_fallback_content
+* sidebar_placeholder_content
+* sidebar_content
+* sidebar_toolbar
 
 ## Example
 
@@ -61,7 +61,7 @@ A component that displays the sidebar menu with multiple extension block points.
 [Source code][3]
 
 Extension points:
-    - sidebar_menu_content
+* sidebar_menu_content
 
 ```twig
 {% embed '@AMP/components/sidebar_menu.html.twig' %}

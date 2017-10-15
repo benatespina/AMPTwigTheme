@@ -17,10 +17,10 @@
 | form_target                      | string     | true     |               | only it can be "_blank" or "_top"                                          |
 
 Extension points:
-    * form_content
-    * form_response_success
-    * form_response_submitting
-    * form_response_error
+* form_content
+* form_response_success
+* form_response_submitting
+* form_response_error
 
 ## Example
 
@@ -177,7 +177,7 @@ A component that displays the form fieldset.
 | form_fieldset_name         | string      | false    |               |                    |
 
 Extension points:
-    * form_fieldset_content
+* form_fieldset_content
 
 ```twig
 {% embed '@AMP/components/form_fieldset.html.twig' with {

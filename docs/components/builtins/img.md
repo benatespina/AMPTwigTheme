@@ -23,8 +23,8 @@
 | img_width           | int        | true     |               |                                               |
 
 Extension points:
-    * img_fallback_content
-    * img_placeholder_content
+* img_fallback_content
+* img_placeholder_content
 
 ## Example
 

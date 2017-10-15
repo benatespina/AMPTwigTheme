@@ -20,8 +20,8 @@
 | pixel_width           | int        | true     |               |                                               |
 
 Extension points:
-    * pixel_fallback_content
-    * pixel_placeholder_content
+* pixel_fallback_content
+* pixel_placeholder_content
 
 ## Example
 
