@@ -36,7 +36,7 @@
 
 {% set img_layout = img_layout|default('responsive') %}
 
-{% set alt = img_alt|default ? 'alt=' ~ img_alt %}
+{% set alt = img_alt|default ? 'alt="' ~ img_alt ~ '"' %}
 {% set attribution = img_attribution|default ? 'attribution=' ~ img_attribution %}
 {% set class = img_class|default ? 'class=' ~ img_class %}
 {% set height = img_height ? 'height=' ~ img_height %}
@@ -53,7 +53,7 @@
 
 <amp-img {{ id }}
         {{ class }}
-        {{ alt }}
+        {{ alt|raw }}
         {{ attribution }}
         {{ height }}
         {{ heights }}
