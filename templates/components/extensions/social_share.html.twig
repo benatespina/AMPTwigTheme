@@ -79,7 +79,7 @@
     {% set data_param_body = social_share_data_param_body|default ? 'data-param-body="' ~ social_share_data_param_body ~ '"' %}
     {% set data_param_recipient = social_share_data_param_recipient|default ? 'data-param-recipient=' ~ social_share_data_param_recipient %}
 
-    {% set data_parameters = data_param_subject ~ ' ' ~ data_param_body ~ ' ' ~  data_param_recipient %}
+    {% set data_parameters = data_param_subject ~ ' ' ~ data_param_body ~ ' ' ~ data_param_recipient %}
 {% endif %}
 
 {% if type == 'facebook' %}
@@ -87,7 +87,7 @@
     {% set data_param_href = social_share_data_param_href|default ? 'data-param-href=' ~ social_share_data_param_href %}
     {% set data_param_quote = social_share_data_param_quote|default ? 'data-param-quote="' ~ social_share_data_param_quote ~ '"' %}
 
-    {% set data_parameters = data_param_app_id ~ ' ' ~ data_param_href ~ ' ' ~  data_param_quote %}
+    {% set data_parameters = data_param_app_id ~ ' ' ~ data_param_href ~ ' ' ~ data_param_quote %}
 {% endif %}
 
 {% if type == 'linkedin' %}
@@ -101,7 +101,7 @@
     {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
     {% set data_param_description = social_share_data_param_description|default ? 'data-param-description="' ~ social_share_data_param_description ~ '"' %}
 
-    {% set data_parameters = data_param_media ~ ' ' ~ data_param_url ~ ' ' ~  data_param_description %}
+    {% set data_parameters = data_param_media ~ ' ' ~ data_param_url ~ ' ' ~ data_param_description %}
 {% endif %}
 
 {% if type == 'g+' %}
