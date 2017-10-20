@@ -7,4 +7,150 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-social-share.md #}
+{##
+    Displays a social share button.
+
+    @param social_share_class                     string
+    @param social_share_id                        string
+    @param social_share_height                    int*
+    @param social_share_layout                    string        only it can be "container", "fill", "fixed",
+                                                                "fixed-height", "flex-item", "nodisplay" or "responsive"
+    @param social_share_title                     string
+    @param social_share_type                      string*
+    @param social_share_data_mode                 string
+    @param social_share_data_param_app_id         string
+    @param social_share_data_param_body           string
+    @param social_share_data_param_description    string
+    @param social_share_data_param_href           string
+    @param social_share_data_param_media          string
+    @param social_share_data_param_quote          string
+    @param social_share_data_param_recipient      string
+    @param social_share_data_param_subject        string
+    @param social_share_data_param_text           string
+    @param social_share_data_param_url            string
+    @param social_share_data_share_endpoint       string
+    @param social_share_width                     int*
+
+    More info about data-param-* can be consumed in
+    https://github.com/ampproject/amphtml/blob/master/extensions/amp-social-share/amp-social-share.md#pre-configured-providers
+#}
+
+{% set content %}
+    {%- block social_share_content -%}
+        {{ social_share_title|default }}
+    {%- endblock social_share_content -%}
+{% endset %}
+
+{% set available_layouts = [
+    'container',
+    'fill',
+    'fixed',
+    'fixed-height',
+    'flex-item',
+    'nodisplay',
+    'responsive'
+] %}
+
+{% set available_types = [
+    'email',
+    'facebook',
+    'linkedin',
+    'pinterest',
+    'g+',
+    'tumblr',
+    'twitter',
+    'whatsapp',
+    'web-share-api',
+    'sms'
+] %}
+
+{% set social_share_layout = social_share_layout|default('responsive') %}
+
+{% set class = social_share_class|default ? 'class=' ~ social_share_class %}
+{% set data_share_endpoint = social_share_data_share_endpoint|default ? 'data-share-endpoint=' ~ social_share_data_share_endpoint %}
+{% set id = social_share_id|default ? 'id=' ~ social_share_id %}
+{% set height = 'height=' ~ social_share_height %}
+{% set layout = social_share_layout in available_layouts ? 'layout=' ~ social_share_layout %}
+{% set type = social_share_type in available_types ? social_share_type %}
+{% set width = 'width=' ~ social_share_width %}
+
+{% if type == 'email' %}
+    {% set data_param_subject = social_share_data_param_subject|default ? 'data-param-subject="' ~ social_share_data_param_subject ~ '"' %}
+    {% set data_param_body = social_share_data_param_body|default ? 'data-param-body="' ~ social_share_data_param_body ~ '"' %}
+    {% set data_param_recipient = social_share_data_param_recipient|default ? 'data-param-recipient=' ~ social_share_data_param_recipient %}
+
+    {% set data_parameters = data_param_subject ~ ' ' ~ data_param_body ~ ' ' ~  data_param_recipient %}
+{% endif %}
+
+{% if type == 'facebook' %}
+    {% set data_param_app_id = social_share_data_param_app_id|default ? 'data-param-app_id=' ~ social_share_data_param_app_id %}
+    {% set data_param_href = social_share_data_param_href|default ? 'data-param-href=' ~ social_share_data_param_href %}
+    {% set data_param_quote = social_share_data_param_quote|default ? 'data-param-quote="' ~ social_share_data_param_quote ~ '"' %}
+
+    {% set data_parameters = data_param_app_id ~ ' ' ~ data_param_href ~ ' ' ~  data_param_quote %}
+{% endif %}
+
+{% if type == 'linkedin' %}
+    {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
+
+    {% set data_parameters = data_param_url %}
+{% endif %}
+
+{% if type == 'pinterest' %}
+    {% set data_param_media = social_share_data_param_media|default ? 'data-param-media=' ~ social_share_data_param_media %}
+    {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
+    {% set data_param_description = social_share_data_param_description|default ? 'data-param-description="' ~ social_share_data_param_description ~ '"' %}
+
+    {% set data_parameters = data_param_media ~ ' ' ~ data_param_url ~ ' ' ~  data_param_description %}
+{% endif %}
+
+{% if type == 'g+' %}
+    {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
+
+    {% set data_parameters = data_param_url %}
+{% endif %}
+
+{% if type == 'tumblr' %}
+    {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
+    {% set data_param_text = social_share_data_param_text|default ? 'data-param-text="' ~ social_share_data_param_text ~ '"' %}
+
+    {% set data_parameters = data_param_url ~ ' ' ~ data_param_text %}
+{% endif %}
+
+{% if type == 'twitter' %}
+    {% set data_param_url = social_share_data_param_url|default ? 'data-param-url=' ~ social_share_data_param_url %}
+    {% set data_param_text = social_share_data_param_text|default ? 'data-param-text="' ~ social_share_data_param_text ~ '"' %}
+
+    {% set data_parameters = data_param_url ~ ' ' ~ data_param_text %}
+{% endif %}
+
+{% if type == 'whatsapp' %}
+    {% set data_param_text = social_share_data_param_text|default ? 'data-param-text="' ~ social_share_data_param_text ~ '"' %}
+
+    {% set data_parameters = data_param_text %}
+{% endif %}
+
+{% if type == 'web-share-api' %}
+    {% set data_param_text = social_share_data_param_text|default ? 'data-param-text="' ~ social_share_data_param_text ~ '"' %}
+    {% set data_param_mode = social_share_data_param_mode|default ? 'data-param-mode=' ~ social_share_data_param_mode %}
+
+    {% set data_parameters = data_param_text ~ ' ' ~ data_param_mode %}
+{% endif %}
+
+{% if type == 'sms' %}
+    {% set data_param_body = social_share_data_param_body|default ? 'data-param-body="' ~ social_share_data_param_body ~ '"' %}
+
+    {% set data_parameters = data_param_body %}
+{% endif %}
+
+<amp-social-share
+        type="{{ type }}"
+        {{ class }}
+        {{ id }}
+        {{ height }}
+        {{ layout }}
+        {{ data_parameters|raw }}
+        {{ data_share_endpoint }}
+        {{ width }}>
+    {{ content }}
+</amp-social-share>

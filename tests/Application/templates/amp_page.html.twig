@@ -74,6 +74,11 @@
     form.amp-form-submit-success.hide-inputs > input {
         display: none;
     }
+
+    amp-social-share {
+        height: 50px;
+        width: 50px;
+    }
 {%- endblock styles -%}
 
 {% set extensions_enabled = [
@@ -84,6 +89,7 @@
     'amp-iframe',
     'amp-mustache',
     'amp-sidebar',
+    'amp-social-share',
     'amp-youtube'
 ] %}
 
@@ -227,6 +233,22 @@
             } %}
         </section>
         <section>
+            {% include '@AMP/components/extensions/social_share.html.twig' with {
+                social_share_data_param_text: 'Check out this article',
+                social_share_data_share_endpoint: 'whatsapp://send',
+                social_share_height: 100,
+                social_share_title: 'Share on Whatsapp',
+                social_share_type: 'whatsapp',
+                social_share_width: 100
+            } %}
+            {% include '@AMP/components/extensions/social_share.html.twig' with {
+                social_share_data_param_text: 'This is my awesome personal page',
+                social_share_data_param_url: 'https://benatespina.com',
+                social_share_height: 100,
+                social_share_title: 'Share on Twitter',
+                social_share_type: 'twitter',
+                social_share_width: 100
+            } %}
             <h2>This is the second section of the main</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

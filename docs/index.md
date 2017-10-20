@@ -13,4 +13,5 @@
         * [gist](components/extensions/gist.md)
         * [iframe](components/extensions/iframe.md)
         * [sidebar](components/extensions/sidebar.md)
+        * [social_share](components/extensions/social_share.md)
         * [youtube](components/extensions/youtube.md)
