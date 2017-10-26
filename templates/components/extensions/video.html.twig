@@ -7,4 +7,110 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/builtins/amp-video.md #}
+{##
+    A replacement for the HTML5 video tag; only to be used for direct HTML5 video file embeds.
+
+    @param video_album                   string
+    @param video_artist                  string
+    @param video_artwork                 string
+    @param video_autoplay                bool=false
+    @param video_class                   string
+    @param video_controls                bool=false
+    @param video_controls_list           bool=false
+    @param video_crossorigin             bool=false
+    @param video_disableremoteplayback   bool=false
+    @param video_height                  int
+    @param video_heights                 string         only matters when the layout is "responsive"
+    @param video_id                      string
+    @param video_layout                  string*        only it can be "fill", "fixed", "fixed-height", "flex-item", "nodisplay" or "responsive"
+    @param video_loop                    bool=false
+    @param video_media                   string
+    @param video_noloading               string         only it can be "noloading"
+    @param video_on                      string
+    @param video_poster                  string
+    @param video_sizes                   string
+    @param video_src                     string
+    @param video_sources                 array          key/value array with "src" and "type" properties
+    @param video_title                   string
+    @param video_tracks                  array          key/value array with "src", "kind", "scrlang" and "label" properties
+    @param video_width                   int
+#}
+
+{% set fallback_content %}
+    {% block video_fallback_content %}{% endblock video_fallback_content %}
+{% endset %}
+
+{% set placeholder_content %}
+    {% block video_placeholder_content %}{% endblock video_placeholder_content %}
+{% endset %}
+
+{% set available_layouts = [
+    'fill',
+    'fixed',
+    'fixed-height',
+    'flex-item',
+    'nodisplay',
+    'responsive'
+] %}
+
+{% set sources = '' %}
+{% for source in video_sources|default([]) %}
+    {% set sources = sources ~ '<source src=' ~ source.src ~ ' type=' ~ source.type ~ '>' %}
+{% endfor %}
+
+
+{% set tracks = '' %}
+{% for track in video_tracks|default([]) %}
+    {% set tracks = tracks ~ '<track src=' ~ track.src ~ ' kind=' ~ track.kind ~ ' srclang=' ~ track.srclang ~ ' label=' ~ track.label ~ '>' %}
+{% endfor %}
+
+{% set album = video_album|default ? 'album=' ~ video_album %}
+{% set artist = video_artist|default ? 'artist=' ~ video_artist %}
+{% set artwork = video_artwork|default ? 'artwork=' ~ video_artwork %}
+{% set autoplay = video_autoplay|default(false) ? 'autoplay' %}
+{% set class = video_class|default ? 'class=' ~ video_class %}
+{% set controls = video_controls|default(false) ? 'controls' %}
+{% set controls_list = video_controls_list|default(false) ? 'controlsList' %}
+{% set crossorigin = video_crossorigin|default(false) ? 'crossorigin' %}
+{% set disableremoteplayback = video_disableremoteplayback|default(false) ? 'disableremoteplayback' %}
+{% set height = video_height|default ? 'height=' ~ video_height %}
+{% set heights = video_heights|default ? 'heights=' ~ video_heights %}
+{% set loop = video_loop|default(false) ? 'loop' %}
+{% set id = video_id|default ? 'id=' ~ video_id %}
+{% set layout = video_layout in available_layouts ? 'layout=' ~ video_layout %}
+{% set media = video_media|default ? 'media=' ~ video_media %}
+{% set noloading = video_noloading|default ? 'noloading' %}
+{% set on = video_on|default ? 'on=' ~ video_on %}
+{% set poster = video_poster|default ? 'poster=' ~ video_poster %}
+{% set sizes = video_sizes|default ? 'sizes=' ~ video_sizes %}
+{% set src = video_src|default ? 'src=' ~ video_src %}
+{% set title = video_title|default ? 'title=' ~ video_title %}
+{% set width = video_width|default ? 'width=' ~ video_width %}
+
+<amp-video {{ id }}
+        {{ album }}
+        {{ artist }}
+        {{ artwork }}
+        {{ autoplay }}
+        {{ class }}
+        {{ controls }}
+        {{ controls_list }}
+        {{ crossorigin }}
+        {{ disableremoteplayback }}
+        {{ height }}
+        {{ heights }}
+        {{ layout }}
+        {{ media }}
+        {{ noloading }}
+        {{ on }}
+        {{ sizes }}
+        {{ loop }}
+        {{ poster }}
+        {{ src }}
+        {{ title }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+    {{ sources|raw }}
+    {{ tracks|raw }}
+</amp-video>

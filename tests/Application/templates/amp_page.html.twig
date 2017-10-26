@@ -90,6 +90,7 @@
     'amp-mustache',
     'amp-sidebar',
     'amp-social-share',
+    'amp-video',
     'amp-youtube'
 ] %}
 
@@ -286,6 +287,30 @@
                 youtube_height: '20',
                 youtube_width: '30'
             } %}
+        </section>
+        <section>
+            {% embed '@AMP/components/extensions/video.html.twig' with {
+                video_autoplay: true,
+                video_controls: true,
+                video_height: 10,
+                video_layout: 'responsive',
+                video_poster: 'https://ampbyexample.com/img/tokyo.jpg',
+                video_sources: [{
+                    type: 'video/webm',
+                    src: 'https://ampbyexample.com/video/tokyo.webm'
+                }, {
+                    type: 'video/ogg',
+                    src: 'https://ampbyexample.com/video/tokyo.ogg'
+                }],
+                video_src: 'https://ampbyexample.com/video/tokyo.mp4',
+                video_width: 20
+            } %}
+                {%- block video_placeholder -%}
+                    <div fallback>
+                        <p>Your browser doesn't support HTML5 video.</p>
+                    </div>
+                {%- endblock video_placeholder -%}
+            {% endembed %}
         </section>
     </main>
     <aside class="aside">
