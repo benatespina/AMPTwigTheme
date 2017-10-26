@@ -7,4 +7,61 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-vimeo.md #}
+{##
+    Displays a Vimeo video.
+
+    @param vimeo_class                   string
+    @param vimeo_data_vimeo_id           string*
+    @param vimeo_height                  int
+    @param vimeo_heights                 string                   only matters when the layout is "responsive"
+    @param vimeo_id                      string
+    @param vimeo_layout                  string=responsive        only it can be "fill", "fixed", "fixed-height", "flex-item", "nodisplay" or "responsive"
+    @param vimeo_noloading               string                   only it can be "noloading"
+    @param vimeo_on                      string
+    @param vimeo_sizes                   string
+    @param vimeo_width                   int
+#}
+
+{% set fallback_content %}
+    {% block vimeo_fallback_content %}{% endblock vimeo_fallback_content %}
+{% endset %}
+
+{% set placeholder_content %}
+    {% block vimeo_placeholder_content %}{% endblock vimeo_placeholder_content %}
+{% endset %}
+
+{% set available_layouts = [
+    'fill',
+    'fixed',
+    'fixed-height',
+    'flex-item',
+    'nodisplay',
+    'responsive'
+] %}
+
+{% set vimeo_layout = vimeo_layout|default('responsive') %}
+
+{% set class = vimeo_class|default ? 'class=' ~ vimeo_class %}
+{% set data_video_id = vimeo_data_video_id|default ? 'data-videoid=' ~ vimeo_data_video_id %}
+{% set height = vimeo_height|default ? 'height=' ~ vimeo_height %}
+{% set heights = vimeo_heights|default ? 'heights=' ~ vimeo_heights %}
+{% set id = vimeo_id|default ? 'id=' ~ vimeo_id %}
+{% set layout = vimeo_layout in available_layouts ? 'layout=' ~ vimeo_layout %}
+{% set noloading = vimeo_noloading|default ? 'noloading' %}
+{% set on = vimeo_on|default ? 'on=' ~ vimeo_on %}
+{% set sizes = vimeo_sizes|default ? 'sizes=' ~ vimeo_sizes %}
+{% set width = vimeo_width|default ? 'width=' ~ vimeo_width %}
+
+<amp-vimeo {{ id }}
+        {{ class }}
+        {{ data_video_id }}
+        {{ height }}
+        {{ heights }}
+        {{ layout }}
+        {{ noloading }}
+        {{ on }}
+        {{ sizes }}
+        {{ width }}>
+    {{ fallback_content }}
+    {{ placeholder_content }}
+</amp-vimeo>

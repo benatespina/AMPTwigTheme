@@ -91,6 +91,7 @@
     'amp-sidebar',
     'amp-social-share',
     'amp-video',
+    'amp-vimeo',
     'amp-youtube'
 ] %}
 
@@ -311,6 +312,12 @@
                     </div>
                 {%- endblock video_placeholder -%}
             {% endembed %}
+
+            {% include '@AMP/components/extensions/vimeo.html.twig' with {
+                vimeo_data_video_id: '27246366',
+                vimeo_height: 280,
+                vimeo_width: 500
+            } %}
         </section>
     </main>
     <aside class="aside">
