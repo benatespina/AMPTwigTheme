@@ -169,7 +169,7 @@
     'zucks'
 ] %}
 
-{% set layout = ad_layout|default('responsive') %}
+{% set layout = ad_layout|default %}
 
 {% set type_data_attributes = '' %}
 {% for key, value in ad_type_data_attributes|default %}

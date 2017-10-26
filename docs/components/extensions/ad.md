@@ -48,8 +48,8 @@ Extension points:
         'data-ad-client': 'ca-pub-2005682797531342',
         'data-ad-slot': '7046626912'
     },
-    ad_height: '200px',
-    ad_width: '200px'
+    ad_height: '200',
+    ad_width: '200'
 } %}
 ```
 
