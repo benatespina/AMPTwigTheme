@@ -7,4 +7,16 @@
     file that was distributed with this source code.
 #}
 
-{# https://github.com/ampproject/amphtml/blob/master/extensions/amp-access/amp-sticky-ad.md #}
+{##
+    Provides a way to fix an ad to the bottom of a page.
+    The sticky-ad serves as a container, with the ad as its child..
+#}
+
+{% set ad %}
+    {%- block sticky_ad_content -%}{%- endblock sticky_ad_content -%}
+{% endset %}
+
+{% set class = vimeo_class|default ? 'class=' ~ vimeo_class %}
+{% set id = vimeo_id|default ? 'id=' ~ vimeo_id %}
+
+<amp-sticky-ad {{ id }} {{ class }} layout="nodisplay">{{ ad }}</amp-sticky-ad>

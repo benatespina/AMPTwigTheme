@@ -84,8 +84,10 @@
 
 {% for extension in extensions_enabled|default %}
     {% set type = extension == 'amp-mustache' ? 'custom-template' : 'custom-element' %}
+    {% set version = extension == 'amp-sticky-ad' ? '1.0' : '0.1' %}
 
     {% if extension in extensions %}
-        <script async {{ type }}="{{ extension }}" src="{{ 'https://cdn.ampproject.org/v0/' ~ extension ~ '-0.1.js' }}"></script>
+        <script async {{ type }}="{{ extension }}"
+                src="{{ 'https://cdn.ampproject.org/v0/' ~ extension ~ '-' ~ version ~ '.js' }}"></script>
     {% endif %}
 {% endfor %}

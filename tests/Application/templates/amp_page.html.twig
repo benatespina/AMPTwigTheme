@@ -90,6 +90,7 @@
     'amp-mustache',
     'amp-sidebar',
     'amp-social-share',
+    'amp-sticky-ad',
     'amp-video',
     'amp-vimeo',
     'amp-youtube'
@@ -111,6 +112,19 @@
 {%- endblock sidebar -%}
 
 {%- block content -%}
+    {% embed '@AMP/components/extensions/sticky_ad.html.twig' %}
+        {%- block sticky_ad_content -%}
+            {% include '@AMP/components/extensions/ad.html.twig' with {
+                ad_type: 'doubleclick',
+                ad_type_data_attributes: {
+                    'data-slot': '/35096353/amptesting/formats/sticky'
+                },
+                ad_height: 50,
+                ad_width: 320
+            } %}
+        {%- endblock sticky_ad_content -%}
+    {% endembed %}
+
     <header class="header">
         <h1>This is the the header of the document</h1>
     </header>

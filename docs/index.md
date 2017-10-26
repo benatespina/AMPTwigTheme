@@ -14,6 +14,7 @@
         * [iframe](components/extensions/iframe.md)
         * [sidebar](components/extensions/sidebar.md)
         * [social_share](components/extensions/social_share.md)
+        * [sticky_ad](components/extensions/sticky_ad.md)
         * [video](components/extensions/video.md)
         * [vimeo](components/extensions/vimeo.md)
         * [youtube](components/extensions/youtube.md)
