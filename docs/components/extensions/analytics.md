@@ -45,6 +45,6 @@ Extension points:
 
 - Back to the [index](../../index.md).
 
-[1]: https://github.com/ampproject/amphtml/blob/master/extensions/amp-gist/amp-gist.md
-[2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/extensions/gist.html.twig
+[1]: https://github.com/ampproject/amphtml/blob/master/extensions/amp-analytics/amp-analytics.md
+[2]: https://github.com/benatespina/AMPTwigTheme/blob/master/templates/components/extensions/analytics.html.twig
 [3]: https://developers.google.com/analytics/devguides/collection/amp-analytics/
